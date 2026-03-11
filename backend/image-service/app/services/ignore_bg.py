@@ -1,19 +1,98 @@
 """
-Модуль описать, что здесь определяется объект переднего фона
-Вырезается цветная маска, весь задний фон закрашивается в черный цвет и не учитывается в анализе.
-Маска периодически обрезает часть переднего фона, но это не критично, тк обрезается менее 5%, что не является критическим
-показателем.
-
-Описать GrabCut. Что это такое
-
+Модуль для выделения переднего плана и получения доминирующих цветов.
 """
+import math
 
-# Импорт необходимых библиотек
-import argparse
 import numpy as np
 import cv2
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
+
+from data.data_colors import WEBCOLORS_CCS3_RGB
+
+
+def get_color_name(rgb):
+    """
+    Возвращает название цвета по RGB, используя ближайшее евклидово расстояние
+    к набору предопределённых цветов.
+    """
+    colors = {
+        'красный': (255, 0, 0),
+        'оранжевый': (255, 165, 0),
+        'желтый': (255, 255, 0),
+        'зеленый': (0, 255, 0),
+        'голубой': (0, 255, 255),
+        'синий': (0, 0, 255),
+        'фиолетовый': (128, 0, 128),
+        'розовый': (255, 192, 203),
+        'коричневый': (165, 42, 42),
+        'серый': (128, 128, 128),
+        'черный': (0, 0, 0),
+        'белый': (255, 255, 255),
+        'темно-синий': (0, 0, 128),
+        'светло-зеленый': (144, 238, 144),
+        'бирюзовый': (64, 224, 208),
+        'оливковый': (128, 128, 0),
+        'пурпурный': (255, 0, 255),
+        'темно-красный': (139, 0, 0),
+        'золотой': (255, 215, 0)
+    }
+    min_dist = float('inf')
+    best_name = None
+    for name, ref_rgb in colors.items():
+        dist = sum((c - r) ** 2 for c, r in zip(rgb, ref_rgb))
+        if dist < min_dist:
+            min_dist = dist
+            best_name = name
+    return best_name
+
+def rgb_to_hsv(r, g, b):
+    """Конвертирует RGB в HSV (все значения нормированы в 0..1)."""
+    r, g, b = r / 255.0, g / 255.0, b / 255.0
+    max_val = max(r, g, b)
+    min_val = min(r, g, b)
+    diff = max_val - min_val
+    # Hue
+    if diff == 0:
+        h = 0
+    elif max_val == r:
+        h = (60 * ((g - b) / diff) + 360) % 360
+    elif max_val == g:
+        h = (60 * ((b - r) / diff) + 120) % 360
+    else: # max_val == b
+        h = (60 * ((r - g) / diff) + 240) % 360
+    # Saturation
+    s = 0 if max_val == 0 else diff / max_val
+    # Value
+    v = max_val
+    return (h, s, v)
+
+def hue_distance(h1, h2):
+    """Циклическое расстояние между оттенками в градусах (0-360)."""
+    d = abs(h1 - h2)
+    return min(d, 360 - d)
+
+def find_closest_webcolor_hsv(rgb, color_dict=WEBCOLORS_CCS3_RGB, weights=(1.0, 0.5, 0.5)):
+    """
+    Поиск ближайшего цвета по HSV с весами для (H, S, V).
+    weights: кортеж (вес оттенка, вес насыщенности, вес яркости).
+    """
+    r, g, b = rgb
+    h_target, s_target, v_target = rgb_to_hsv(r, g, b)
+    wh, ws, wv = weights
+    min_dist = float('inf')
+    closest_name = None
+    for name, (cr, cg, cb) in color_dict.items():
+        h_c, s_c, v_c = rgb_to_hsv(cr, cg, cb)
+        # Расстояние по оттенку с учётом цикличности
+        dh = hue_distance(h_target, h_c) / 180.0  # нормируем до 0..2
+        ds = abs(s_target - s_c)
+        dv = abs(v_target - v_c)
+        # Взвешенное евклидово расстояние
+        dist = math.sqrt(wh * dh**2 + ws * ds**2 + wv * dv**2)
+        if dist < min_dist:
+            min_dist = dist
+            closest_name = name
+    return closest_name
 
 def centroid_histogram(clt):
     """
@@ -25,20 +104,6 @@ def centroid_histogram(clt):
     hist = hist.astype("float")
     hist /= hist.sum()
     return hist
-
-def plot_colors(hist, centroids):
-    """
-    Создаёт цветную полосу пропорционально доле каждого кластера.
-    Возвращает изображение-полосу.
-    """
-    bar = np.zeros((50, 300, 3), dtype="uint8")
-    startX = 0
-    for (percent, color) in zip(hist, centroids):
-        endX = startX + (percent * 300)
-        cv2.rectangle(bar, (int(startX), 0), (int(endX), 50),
-                      color.astype("uint8").tolist(), -1)
-        startX = endX
-    return bar
 
 def get_foreground_mask(image_rgb):
     """
@@ -64,83 +129,39 @@ def apply_mask_to_image(image_rgb, mask):
     Накладывает маску на изображение: фон становится чёрным,
     объект сохраняет исходные цвета.
     """
-    # Создаём копию изображения и умножаем на маску (по каналам)
     masked = image_rgb * np.stack([mask]*3, axis=2)
     return masked.astype(np.uint8)
 
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--image", required=True, help="путь к изображению")
-    ap.add_argument("-c", "--clusters", required=True, type=int, help="количество кластеров")
-    ap.add_argument("--ignore-bg", action="store_true", help="исключать фон (небо, траву, деревья)")
-    ap.add_argument("--save-masked", metavar="PATH", help="сохранить изображение с вырезанным объектом")
-    args = vars(ap.parse_args())
-
-    # Загрузка изображения
-    image = cv2.imread(args["image"])
-    if image is None:
-        print("Ошибка: не удалось загрузить изображение. Проверьте путь.")
-        exit()
-
-    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-    if args["ignore_bg"]:
-        print("Выделяем передний план...")
+def get_dominant_colors(image_rgb, n_clusters=3, ignore_bg=True):
+    """
+    Возвращает список доминирующих цветов (центроидов KMeans) и их доли.
+    Если ignore_bg=True, предварительно выделяется передний план.
+    Возвращает список словарей: [{'rgb': [r,g,b], 'percentage': float, 'color_name': str}, ...]
+    """
+    if ignore_bg:
         mask = get_foreground_mask(image_rgb)
-
-        # Визуализация: исходное изображение, маска, объект на чёрном фоне
-        masked_obj = apply_mask_to_image(image_rgb, mask)
-
-        plt.figure(figsize=(12, 4))
-        plt.subplot(1, 3, 1)
-        plt.imshow(image_rgb)
-        plt.title("Исходное изображение")
-        plt.axis("off")
-
-        plt.subplot(1, 3, 2)
-        plt.imshow(mask, cmap='gray')
-        plt.title("Маска переднего плана")
-        plt.axis("off")
-
-        plt.subplot(1, 3, 3)
-        plt.imshow(masked_obj)
-        plt.title("Объект (фон чёрный)")
-        plt.axis("off")
-
-        plt.tight_layout()
-        plt.show()
-
-        # Сохраняем изображение с объектом, если указан параметр
-        if args["save_masked"]:
-            # Конвертируем обратно в BGR для OpenCV и сохраняем
-            cv2.imwrite(args["save_masked"], cv2.cvtColor(masked_obj, cv2.COLOR_RGB2BGR))
-            print(f"Изображение с объектом сохранено в {args['save_masked']}")
-
-        # Берём только пиксели переднего плана для анализа
         pixels = image_rgb[mask == 1]
         if len(pixels) == 0:
-            print("Предупреждение: передний план не найден. Обрабатываем всё изображение.")
+            # Если передний план не найден, используем всё изображение
             pixels = image_rgb.reshape((-1, 3))
     else:
         pixels = image_rgb.reshape((-1, 3))
-        # Если фон не исключаем, показываем только исходное изображение
-        plt.figure()
-        plt.imshow(image_rgb)
-        plt.title("Исходное изображение")
-        plt.axis("off")
-        plt.show()
 
     # Кластеризация
-    clt = KMeans(n_clusters=args["clusters"])
+    clt = KMeans(n_clusters=n_clusters)
     clt.fit(pixels)
 
     hist = centroid_histogram(clt)
     centroids = clt.cluster_centers_
-    bar = plot_colors(hist, centroids)
 
-    # Отображение цветовой гистограммы
-    plt.figure()
-    plt.imshow(bar)
-    plt.title("Цветовая гистограмма (KMeans)" + (" – только передний план" if args["ignore_bg"] else ""))
-    plt.axis("off")
-    plt.show()
+    # Сортировка по убыванию доли
+    sorted_indices = np.argsort(hist)[::-1]
+    result = []
+    for i in sorted_indices:
+        rgb = [int(centroids[i][0]), int(centroids[i][1]), int(centroids[i][2])]
+        result.append({
+            'rgb': rgb,
+            'percentage': float(hist[i]),
+            'color_name': find_closest_webcolor_hsv(rgb)
+        })
+    return result
