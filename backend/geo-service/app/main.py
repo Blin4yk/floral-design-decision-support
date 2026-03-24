@@ -1,24 +1,11 @@
-import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
-from api.v1 import geo
-
-# @contextlib.asynccontextmanager
-# async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-#     pass
+app = FastAPI(title="flora-geo-mock")
 
 
-app = FastAPI(
-    docs_url='/api/openapi',
-    openapi_url='/api/openapi.json',
-    allow_origins=['*'],
-    allow_methods=['*'],
-    allow_headers=['*'],
-    # lifespan=lifespan,
-)
-
-app.include_router(geo.router)
-
-# Для локальной разработки надо раскомментировать код ниже
-if __name__ == '__main__':
-    uvicorn.run("main:app", host='0.0.0.0', port=8001, reload=True)
+@app.get("/api/location/zone")
+async def get_zone(lat: float = Query(...), lng: float = Query(...)):
+    zone = "5b" if lat >= 50 else "6a"
+    city = "Москва" if lng > 30 else "Санкт-Петербург"
+    season = "Апрель-Май"
+    return {"zone": zone, "city": city, "season": season}

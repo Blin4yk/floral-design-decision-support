@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1440 900"
+   font-family="Georgia, serif"
+   version="1.1"
+   id="svg46"
+   sodipodi:docname="01_landing.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs46" />
+  <sodipodi:namedview
+     id="namedview46"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.61577475"
+     inkscape:cx="719.41891"
+     inkscape:cy="390.5649"
+     inkscape:window-width="1102"
+     inkscape:window-height="250"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg46" />
+  <rect
+     width="1440"
+     height="900"
+     fill="#f7f3ec"
+     id="rect1" />
+  <rect
+     width="1440"
+     height="64"
+     fill="#f0ebe0"
+     id="rect2" />
+  <rect
+     y="64"
+     width="1440"
+     height="1"
+     fill="#c8dbc4"
+     id="rect3" />
+  <circle
+     cx="52"
+     cy="32"
+     r="16"
+     fill="#1a2e1a"
+     id="circle3" />
+  <ellipse
+     cx="52"
+     cy="32"
+     rx="5"
+     ry="8"
+     fill="#7a9e72"
+     opacity="0.7"
+     id="ellipse3" />
+  <text
+     x="76"
+     y="40"
+     font-size="20"
+     font-weight="600"
+     fill="#1a2e1a"
+     id="text3">Flora Vision</text>
+  <text
+     x="700"
+     y="40"
+     font-size="15"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text4">Как это работает</text>
+  <text
+     x="870"
+     y="40"
+     font-size="15"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text5">Примеры</text>
+  <rect
+     x="1200"
+     y="18"
+     width="200"
+     height="36"
+     rx="18"
+     fill="#1a2e1a"
+     id="rect5" />
+  <text
+     x="1300"
+     y="41"
+     font-size="14"
+     fill="#f0ebe0"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text6">Начать бесплатно</text>
+  <rect
+     x="56"
+     y="96"
+     width="240"
+     height="30"
+     rx="15"
+     fill="#e4ddd0"
+     stroke="#c8dbc4"
+     stroke-width="1"
+     id="rect6" />
+  <circle
+     cx="76"
+     cy="111"
+     r="6"
+     fill="#7a9e72"
+     id="circle6" />
+  <text
+     x="90"
+     y="116"
+     font-size="12"
+     fill="#4a6741"
+     font-family="sans-serif"
+     letter-spacing="0.06em"
+     id="text7">КОМПЬЮТЕРНОЕ ЗРЕНИЕ</text>
+  <text
+     x="56"
+     y="210"
+     font-size="80"
+     font-weight="600"
+     fill="#1a2e1a"
+     id="text8">Подбери</text>
+  <text
+     x="56"
+     y="298"
+     font-size="80"
+     font-weight="600"
+     fill="#1a2e1a"
+     id="text9">растения под</text>
+  <text
+     x="56"
+     y="386"
+     font-size="80"
+     font-style="italic"
+     font-weight="600"
+     fill="#4a6741"
+     id="text10">цвет сада</text>
+  <text
+     x="56"
+     y="435"
+     font-size="18"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text11">Загрузи фото участка — мы извлечём палитру,</text>
+  <text
+     x="56"
+     y="460"
+     font-size="18"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text12">наложим круг Иттена и подберём растения.</text>
+  <rect
+     x="56"
+     y="490"
+     width="256"
+     height="56"
+     rx="28"
+     fill="#1a2e1a"
+     id="rect12" />
+  <text
+     x="184"
+     y="522"
+     font-size="16"
+     fill="#f0ebe0"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text13">Анализировать сад</text>
+  <text
+     x="326"
+     y="522"
+     font-size="16"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text14">→ Смотреть примеры</text>
+  <rect
+     x="56"
+     y="566"
+     width="500"
+     height="84"
+     rx="18"
+     fill="#e4ddd0"
+     stroke="#c8dbc4"
+     stroke-width="1"
+     id="rect14" />
+  <text
+     x="110"
+     y="610"
+     font-size="42px"
+     font-weight="600"
+     fill="#1a2e1a"
+     id="text15">3 400+</text>
+  <text
+     x="110"
+     y="634"
+     font-size="14"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text16">видов растений в базе</text>
+  <line
+     x1="336"
+     y1="584"
+     x2="336"
+     y2="632"
+     stroke="#c8dbc4"
+     stroke-width="1"
+     id="line16" />
+  <text
+     x="384"
+     y="610"
+     font-size="42"
+     font-weight="600"
+     fill="#1a2e1a"
+     id="text17">98%</text>
+  <text
+     x="384"
+     y="634"
+     font-size="14"
+     fill="#5a6e57"
+     font-family="sans-serif"
+     id="text18">точность анализа</text>
+  <rect
+     x="720"
+     y="64"
+     width="720"
+     height="836"
+     fill="#1a2e1a"
+     id="rect18" />
+  <line
+     x1="720"
+     y1="380"
+     x2="1440"
+     y2="380"
+     stroke="#2d4a2d"
+     stroke-width="1"
+     id="line18" />
+  <line
+     x1="1080"
+     y1="64"
+     x2="1080"
+     y2="900"
+     stroke="#2d4a2d"
+     stroke-width="1"
+     id="line19" />
+  <line
+     x1="1080"
+     y1="780"
+     x2="1080"
+     y2="210"
+     stroke="#4a6741"
+     stroke-width="4"
+     id="line20" />
+  <ellipse
+     cx="990"
+     cy="540"
+     rx="100"
+     ry="38"
+     fill="#2d4a2d"
+     transform="rotate(-28 990 540)"
+     id="ellipse20" />
+  <ellipse
+     cx="985"
+     cy="460"
+     rx="82"
+     ry="30"
+     fill="#243e24"
+     transform="rotate(-18 985 460)"
+     id="ellipse21" />
+  <ellipse
+     cx="1170"
+     cy="520"
+     rx="100"
+     ry="38"
+     fill="#2d4a2d"
+     transform="rotate(28 1170 520)"
+     id="ellipse22" />
+  <ellipse
+     cx="1165"
+     cy="445"
+     rx="82"
+     ry="30"
+     fill="#243e24"
+     transform="rotate(22 1165 445)"
+     id="ellipse23" />
+  <ellipse
+     cx="998"
+     cy="360"
+     rx="70"
+     ry="26"
+     fill="#243e24"
+     transform="rotate(-22 998 360)"
+     id="ellipse24" />
+  <ellipse
+     cx="1162"
+     cy="348"
+     rx="68"
+     ry="24"
+     fill="#2d4a2d"
+     transform="rotate(24 1162 348)"
+     id="ellipse25" />
+  <circle
+     cx="1080"
+     cy="202"
+     r="18"
+     fill="#c8dbc4"
+     opacity="0.7"
+     id="circle25" />
+  <circle
+     cx="1108"
+     cy="212"
+     r="18"
+     fill="#c8dbc4"
+     opacity="0.7"
+     id="circle26" />
+  <circle
+     cx="1105"
+     cy="242"
+     r="18"
+     fill="#c8dbc4"
+     opacity="0.7"
+     id="circle27" />
+  <circle
+     cx="1080"
+     cy="250"
+     r="18"
+     fill="#c8dbc4"
+     opacity="0.7"
+     id="circle28" />
+  <circle
+     cx="1055"
+     cy="242"
+     r="18"
+     fill="#c8dbc4"
+     opacity="0.7"
+     id="circle29" />
+  <circle
+     cx="1052"
+     cy="212"
+     r="18"
+     fill="#c8dbc4"
+     opacity="0.7"
+     id="circle30" />
+  <circle
+     cx="1080"
+     cy="226"
+     r="12"
+     fill="#d4a040"
+     id="circle31" />
+  <rect
+     x="730"
+     y="740"
+     width="420"
+     height="80"
+     rx="18"
+     fill="#ffffff"
+     fill-opacity="0.07"
+     stroke="#ffffff"
+     stroke-opacity="0.1"
+     stroke-width="1"
+     id="rect31" />
+  <text
+     x="752"
+     y="768"
+     font-size="11"
+     fill="#c8dbc4"
+     font-family="sans-serif"
+     letter-spacing="0.08em"
+     id="text31">ВЫБРАННАЯ ПАЛИТРА</text>
+  <circle
+     cx="764"
+     cy="798"
+     r="14"
+     fill="#9878c8"
+     id="circle32" />
+  <circle
+     cx="798"
+     cy="798"
+     r="14"
+     fill="#38a840"
+     id="circle33" />
+  <circle
+     cx="832"
+     cy="798"
+     r="14"
+     fill="#e8a820"
+     id="circle34" />
+  <circle
+     cx="866"
+     cy="798"
+     r="14"
+     fill="#2878c8"
+     id="circle35" />
+  <circle
+     cx="900"
+     cy="798"
+     r="14"
+     fill="#c0706a"
+     id="circle36" />
+  <circle
+     cx="934"
+     cy="798"
+     r="14"
+     fill="#20a898"
+     id="circle37" />
+  <rect
+     y="710"
+     width="720"
+     height="190"
+     fill="#e4ddd0"
+     id="rect37" />
+  <text
+     x="360"
+     y="752"
+     font-size="12"
+     fill="#4a6741"
+     text-anchor="middle"
+     font-family="sans-serif"
+     letter-spacing="0.1em"
+     id="text37">КАК ЭТО РАБОТАЕТ</text>
+  <text
+     x="360"
+     y="792"
+     font-size="34"
+     font-weight="600"
+     fill="#1a2e1a"
+     text-anchor="middle"
+     id="text38">Три шага до мудборда</text>
+  <circle
+     cx="97.549408"
+     cy="845.42291"
+     r="24"
+     fill="#1a2e1a"
+     id="circle38" />
+  <text
+     x="97.140976"
+     y="851.60608"
+     font-size="17px"
+     fill="#f0ebe0"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text39">1</text>
+  <text
+     x="97.549408"
+     y="882.73254"
+     font-size="13px"
+     fill="#1a2e1a"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text40"
+     inkscape:transform-center-x="-2.8590218">Фото</text>
+  <line
+     x1="140"
+     y1="854"
+     x2="230"
+     y2="854"
+     stroke="#c8dbc4"
+     stroke-width="1.5"
+     stroke-dasharray="4 3"
+     id="line40" />
+  <circle
+     cx="268.77472"
+     cy="843.78918"
+     r="24"
+     fill="#1a2e1a"
+     id="circle40" />
+  <text
+     x="268.77472"
+     y="852.01453"
+     font-size="17px"
+     fill="#f0ebe0"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text41">2</text>
+  <text
+     x="269.59158"
+     y="882.73254"
+     font-size="13px"
+     fill="#1a2e1a"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text42" />
+  <line
+     x1="310"
+     y1="854"
+     x2="400"
+     y2="854"
+     stroke="#c8dbc4"
+     stroke-width="1.5"
+     stroke-dasharray="4 3"
+     id="line42" />
+  <circle
+     cx="438.64252"
+     cy="846.53387"
+     r="24"
+     fill="#1a2e1a"
+     id="circle42" />
+  <text
+     x="437.96378"
+     y="854.21265"
+     font-size="17px"
+     fill="#f0ebe0"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text43">3</text>
+  <text
+     x="439.32126"
+     y="884.64252"
+     font-size="13px"
+     fill="#1a2e1a"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text44">Локация</text>
+  <line
+     x1="480"
+     y1="854"
+     x2="570"
+     y2="854"
+     stroke="#c8dbc4"
+     stroke-width="1.5"
+     stroke-dasharray="4 3"
+     id="line44" />
+  <circle
+     cx="610"
+     cy="848.57007"
+     r="24"
+     fill="#7a9e72"
+     id="circle44" />
+  <text
+     x="610"
+     y="855.57007"
+     font-size="17px"
+     fill="#1a2e1a"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text45">4</text>
+  <text
+     x="610"
+     y="886"
+     font-size="13"
+     fill="#1a2e1a"
+     text-anchor="middle"
+     font-family="sans-serif"
+     id="text46">Мудборд</text>
+  <text
+     xml:space="preserve"
+     style="writing-mode:lr-tb;direction:ltr;white-space:pre;inline-size:108.016;fill:#000000"
+     x="268.10254"
+     y="882.36273"
+     id="text47"
+     transform="translate(-42.081916)"><tspan
+       x="268.10254"
+       y="882.36273"
+       id="tspan1">Желаемая палитра</tspan></text>
+</svg>

@@ -1,0 +1,59 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: flora-frontend
+    environment:
+      - VITE_PROXY_TARGET=http://api-gateway:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    build:
+      context: ./backend/api-gateway
+    container_name: flora-api-gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - auth-service
+      - image-service
+      - geo-service
+      - recommendation-service
+      - preferences-service
+
+  auth-service:
+    build:
+      context: ./backend/auth-service
+    container_name: flora-auth-service
+    ports:
+      - "8001:8001"
+
+  image-service:
+    build:
+      context: ./backend/image-service
+    container_name: flora-image-service
+    ports:
+      - "8002:8002"
+
+  geo-service:
+    build:
+      context: ./backend/geo-service
+    container_name: flora-geo-service
+    ports:
+      - "8003:8003"
+
+  recommendation-service:
+    build:
+      context: ./backend/recommendation-service
+    container_name: flora-recommendation-service
+    ports:
+      - "8004:8004"
+
+  preferences-service:
+    build:
+      context: ./backend/preferences-service
+    container_name: flora-preferences-service
+    ports:
+      - "8005:8005"

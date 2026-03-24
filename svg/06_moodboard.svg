@@ -1,0 +1,177 @@
+<svg width="1100" height="820" viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1100" height="820" fill="#f7f3ec"/>
+  <rect width="1100" height="56" fill="#f0ebe0"/>
+  <rect y="56" width="1100" height="1" fill="#c8dbc4"/>
+  <circle cx="40" cy="28" r="13" fill="#1a2e1a"/>
+  <text x="62" y="34" font-size="16" font-weight="600" fill="#1a2e1a" font-family="Georgia, serif">Flora Vision</text>
+  <text x="540" y="34" font-size="13" fill="#5a6e57" font-family="Arial, sans-serif">← Изменить запрос</text>
+  <rect x="920" y="16" width="160" height="28" rx="14" fill="#1a2e1a"/>
+  <text x="1000" y="34" font-size="12" fill="#f0ebe0" text-anchor="middle" font-family="Arial, sans-serif">Сохранить всё</text>
+  <!-- header -->
+  <text x="36" y="100" font-size="10" fill="#4a6741" font-family="Arial, sans-serif" letter-spacing="1">РЕЗУЛЬТАТ · 14 РАСТЕНИЙ · АНАЛОГИЧНАЯ ГАРМОНИЯ</text>
+  <text x="36" y="138" font-size="38" font-weight="600" fill="#1a2e1a" font-family="Georgia, serif">Ваш ботанический мудборд</text>
+  <text x="36" y="164" font-size="12" fill="#a0b49c" font-family="Arial, sans-serif" font-style="italic">Нажмите на карточку — переверните и увидите рекомендации по уходу</text>
+  <!-- palette bar -->
+  <rect x="36" y="178" width="560" height="34" rx="12" fill="#e4ddd0" stroke="#c8dbc4" stroke-width="1"/>
+  <text x="52" y="199" font-size="10" fill="#5a6e57" font-family="Arial, sans-serif" letter-spacing="1">ПАЛИТРА ИТТЕНА:</text>
+  <circle cx="186" cy="195" r="8" fill="#38A840"/>
+  <circle cx="204" cy="195" r="8" fill="#2878C8"/>
+  <circle cx="222" cy="195" r="8" fill="#90C030"/>
+  <circle cx="240" cy="195" r="8" fill="#20A898"/>
+  <circle cx="258" cy="195" r="8" fill="#6848B8"/>
+  <text x="276" y="199" font-size="11" fill="#5a6e57" font-family="Arial, sans-serif">· Зона 5b · Москва</text>
+  <!-- filters -->
+  <rect x="606" y="178" width="60" height="34" rx="12" fill="#ffffff" stroke="#c8dbc4" stroke-width="1"/>
+  <text x="636" y="200" font-size="12" fill="#5a6e57" text-anchor="middle" font-family="Arial, sans-serif">Все</text>
+  <rect x="674" y="178" width="100" height="34" rx="12" fill="#1a2e1a"/>
+  <text x="724" y="200" font-size="12" fill="#f0ebe0" text-anchor="middle" font-family="Arial, sans-serif">Цветущие</text>
+  <rect x="782" y="178" width="90" height="34" rx="12" fill="#ffffff" stroke="#c8dbc4" stroke-width="1"/>
+  <text x="827" y="200" font-size="12" fill="#5a6e57" text-anchor="middle" font-family="Arial, sans-serif">Теневые</text>
+  <!-- CARD 1 lavender front -->
+  <rect x="36" y="226" width="310" height="300" rx="18" fill="#1a2e1a"/>
+  <rect x="36" y="226" width="310" height="130" rx="18" fill="#88a8d0"/>
+  <rect x="36" y="316" width="310" height="40" fill="#88a8d0"/>
+  <rect x="36" y="356" width="310" height="116" fill="#5a7840"/>
+  <rect x="36" y="452" width="310" height="74" rx="18" fill="#4a6830"/>
+  <rect x="36" y="445" width="310" height="22" fill="#4a6830"/>
+  <rect x="56"  y="334" width="8" height="28" rx="4" fill="#9878c8"/>
+  <rect x="80"  y="328" width="8" height="28" rx="4" fill="#8868b8"/>
+  <rect x="104" y="332" width="8" height="28" rx="4" fill="#a880d0"/>
+  <rect x="128" y="326" width="8" height="28" rx="4" fill="#9878c8"/>
+  <rect x="152" y="331" width="8" height="28" rx="4" fill="#8868b8"/>
+  <rect x="176" y="327" width="8" height="28" rx="4" fill="#a880d0"/>
+  <rect x="200" y="333" width="8" height="28" rx="4" fill="#9878c8"/>
+  <rect x="224" y="329" width="8" height="28" rx="4" fill="#8868b8"/>
+  <rect x="248" y="334" width="8" height="28" rx="4" fill="#a880d0"/>
+  <rect x="272" y="328" width="8" height="28" rx="4" fill="#9878c8"/>
+  <rect x="296" y="332" width="8" height="28" rx="4" fill="#8868b8"/>
+  <rect x="36" y="466" width="310" height="60" rx="18" fill="#1a2e1a"/>
+  <rect x="36" y="456" width="310" height="20" fill="#1a2e1a"/>
+  <rect x="48"  y="236" width="86" height="22" rx="11" fill="#7a9e72"/>
+  <text x="91"  y="251" font-size="10" font-weight="600" fill="#1a2e1a" text-anchor="middle" font-family="Arial, sans-serif">97% совп.</text>
+  <circle cx="326" cy="248" r="11" fill="#9878c8" stroke="#ffffff" stroke-width="2"/>
+  <text x="56"  y="490" font-size="15" font-weight="600" fill="#f0ebe0" font-family="Georgia, serif">Лаванда узколистная</text>
+  <text x="56"  y="508" font-size="10" fill="#9878c8" font-family="Arial, sans-serif" font-style="italic">Lavandula angustifolia</text>
+  <circle cx="326" cy="498" r="14" fill="#2d4a2d"/>
+  <text x="326" cy="503" font-size="15" fill="#7a9e72" text-anchor="middle" font-family="Arial, sans-serif">↺</text>
+  <!-- CARD 2 echinacea BACK (flipped) -->
+  <rect x="358" y="226" width="310" height="300" rx="18" fill="#ffffff" stroke="#c8dbc4" stroke-width="1"/>
+  <rect x="358" y="226" width="310" height="36" rx="18" fill="#f0ebe0"/>
+  <rect x="358" y="248" width="310" height="14" fill="#f0ebe0"/>
+  <text x="513" y="248" font-size="10" fill="#a0b89c" text-anchor="middle" font-family="Arial, sans-serif">обратная сторона  ↺</text>
+  <rect x="358" y="262" width="10" height="264" rx="5" fill="#c0706a"/>
+  <text x="380" y="294" font-size="17" font-weight="600" fill="#1a2e1a" font-family="Georgia, serif">Эхинацея пурпурная</text>
+  <text x="380" y="316" font-size="11" fill="#5a6e57" font-family="Arial, sans-serif" font-style="italic">Echinacea purpurea</text>
+  <circle cx="380" cy="336" r="7" fill="#c0706a"/>
+  <circle cx="396" cy="336" r="7" fill="#d08898"/>
+  <circle cx="412" cy="336" r="7" fill="#a86070"/>
+  <text x="428" y="340" font-size="11" fill="#5a6e57" font-family="Arial, sans-serif">93% совп.</text>
+  <line x1="372" y1="354" x2="658" y2="354" stroke="#ece4d8" stroke-width="1"/>
+  <text x="372" y="372" font-size="12" fill="#5a6e57" font-family="Arial, sans-serif">Высота</text>
+  <text x="656" y="372" font-size="12" font-weight="600" fill="#1a2e1a" text-anchor="end" font-family="Arial, sans-serif">60–120 см</text>
+  <line x1="372" y1="382" x2="658" y2="382" stroke="#ece4d8" stroke-width="1"/>
+  <text x="372" y="400" font-size="12" fill="#5a6e57" font-family="Arial, sans-serif">Цветение</text>
+  <text x="656" y="400" font-size="12" font-weight="600" fill="#1a2e1a" text-anchor="end" font-family="Arial, sans-serif">Июль — Сентябрь</text>
+  <line x1="372" y1="410" x2="658" y2="410" stroke="#ece4d8" stroke-width="1"/>
+  <text x="372" y="428" font-size="12" fill="#5a6e57" font-family="Arial, sans-serif">Полив</text>
+  <text x="656" y="428" font-size="12" font-weight="600" fill="#1a2e1a" text-anchor="end" font-family="Arial, sans-serif">Умеренный</text>
+  <line x1="372" y1="438" x2="658" y2="438" stroke="#ece4d8" stroke-width="1"/>
+  <text x="372" y="456" font-size="12" fill="#5a6e57" font-family="Arial, sans-serif">Зимостойкость</text>
+  <text x="656" y="456" font-size="12" font-weight="600" fill="#1a2e1a" text-anchor="end" font-family="Arial, sans-serif">Зона 3–9</text>
+  <rect x="372" y="466" width="284" height="36" rx="10" fill="#e4ddd0"/>
+  <text x="382" y="481" font-size="11" fill="#5a6e57" font-family="Arial, sans-serif">Посадка: Май — Июнь · 40–50 см</text>
+  <text x="382" y="497" font-size="11" fill="#5a6e57" font-family="Arial, sans-serif">Хорошо с: Рудбекия, Шалфей</text>
+  <text x="656" y="514" font-size="12" fill="#4a6741" text-anchor="end" font-family="Arial, sans-serif">Подробнее →</text>
+  <!-- CARD 3 rudbeckia front -->
+  <rect x="680" y="226" width="384" height="300" rx="18" fill="#1a2e1a"/>
+  <rect x="680" y="226" width="384" height="120" rx="18" fill="#7090b8"/>
+  <rect x="680" y="306" width="384" height="40" fill="#7090b8"/>
+  <rect x="680" y="346" width="384" height="130" fill="#5a7030"/>
+  <rect x="680" y="458" width="384" height="68" rx="18" fill="#4a6020"/>
+  <rect x="680" y="448" width="384" height="24" fill="#4a6020"/>
+  <line x1="716" y1="476" x2="716" y2="350" stroke="#4a6830" stroke-width="2"/>
+  <line x1="754" y1="476" x2="754" y2="344" stroke="#4a6830" stroke-width="2"/>
+  <line x1="792" y1="476" x2="792" y2="348" stroke="#4a6830" stroke-width="2"/>
+  <line x1="830" y1="476" x2="830" y2="342" stroke="#4a6830" stroke-width="2"/>
+  <line x1="868" y1="476" x2="868" y2="347" stroke="#4a6830" stroke-width="2"/>
+  <line x1="906" y1="476" x2="906" y2="344" stroke="#4a6830" stroke-width="2"/>
+  <circle cx="716" cy="340" r="20" fill="#d89820"/>
+  <circle cx="716" cy="340" r="8"  fill="#4a2808"/>
+  <circle cx="730" cy="327" r="9"  fill="#e8a820"/>
+  <circle cx="736" cy="340" r="9"  fill="#d89820"/>
+  <circle cx="730" cy="353" r="9"  fill="#e8a820"/>
+  <circle cx="716" cy="358" r="9"  fill="#d89820"/>
+  <circle cx="702" cy="353" r="9"  fill="#e8a820"/>
+  <circle cx="696" cy="340" r="9"  fill="#d89820"/>
+  <circle cx="702" cy="327" r="9"  fill="#e8a820"/>
+  <circle cx="792" cy="334" r="24" fill="#f0b020"/>
+  <circle cx="792" cy="334" r="10" fill="#402008"/>
+  <circle cx="812" cy="316" r="10" fill="#f0b020"/>
+  <circle cx="818" cy="334" r="10" fill="#e8a820"/>
+  <circle cx="812" cy="352" r="10" fill="#f0b020"/>
+  <circle cx="792" cy="358" r="10" fill="#e8a820"/>
+  <circle cx="772" cy="352" r="10" fill="#f0b020"/>
+  <circle cx="766" cy="334" r="10" fill="#e8a820"/>
+  <circle cx="772" cy="316" r="10" fill="#f0b020"/>
+  <rect x="680" y="466" width="384" height="60" rx="18" fill="#1a2e1a"/>
+  <rect x="680" y="456" width="384" height="22" fill="#1a2e1a"/>
+  <rect x="692" y="236" width="86" height="22" rx="11" fill="#e8b030"/>
+  <text x="735" y="251" font-size="10" font-weight="600" fill="#5a3010" text-anchor="middle" font-family="Arial, sans-serif">89% совп.</text>
+  <text x="698" y="487" font-size="15" font-weight="600" fill="#f0ebe0" font-family="Georgia, serif">Рудбекия волосистая</text>
+  <text x="698" y="506" font-size="10" fill="#d4a060" font-family="Arial, sans-serif" font-style="italic">Rudbeckia hirta</text>
+  <circle cx="1046" cy="496" r="14" fill="#2d4a2d"/>
+  <text x="1046" y="502" font-size="15" fill="#7a9e72" text-anchor="middle" font-family="Arial, sans-serif">↺</text>
+  <!-- ROW 2 small cards -->
+  <rect x="36"  y="540" width="238" height="212" rx="16" fill="#3060a8"/>
+  <rect x="36"  y="700" width="238" height="52"  rx="16" fill="#1a2e1a"/>
+  <rect x="36"  y="690" width="238" height="18"  fill="#1a2e1a"/>
+  <rect x="56"  y="548" width="8" height="26" rx="4" fill="#6098e8"/>
+  <rect x="80"  y="542" width="8" height="26" rx="4" fill="#5088d8"/>
+  <rect x="104" y="546" width="8" height="26" rx="4" fill="#6098e8"/>
+  <rect x="128" y="541" width="8" height="26" rx="4" fill="#5088d8"/>
+  <rect x="152" y="545" width="8" height="26" rx="4" fill="#6098e8"/>
+  <rect x="176" y="542" width="8" height="26" rx="4" fill="#5088d8"/>
+  <text x="52"  y="718" font-size="14" font-weight="600" fill="#f0ebe0" font-family="Georgia, serif">Дельфиниум</text>
+  <text x="52"  y="735" font-size="10" fill="#8ab0d0" font-family="Arial, sans-serif" font-style="italic">Delphinium elatum</text>
+  <circle cx="258" cy="724" r="13" fill="#2d4a2d"/>
+  <text x="258" y="730" font-size="13" fill="#7a9e72" text-anchor="middle" font-family="Arial, sans-serif">↺</text>
+  <rect x="286" y="540" width="238" height="212" rx="16" fill="#2a5a30"/>
+  <rect x="286" y="700" width="238" height="52"  rx="16" fill="#1a2e1a"/>
+  <rect x="286" y="690" width="238" height="18"  fill="#1a2e1a"/>
+  <ellipse cx="405" cy="638" rx="80" ry="30" fill="#1e4826" transform="rotate(-6 405 638)"/>
+  <ellipse cx="405" cy="610" rx="68" ry="24" fill="#2e5e36" transform="rotate(5 405 610)"/>
+  <ellipse cx="405" cy="585" rx="56" ry="18" fill="#1e4826" transform="rotate(-4 405 585)"/>
+  <text x="302" y="718" font-size="14" font-weight="600" fill="#f0ebe0" font-family="Georgia, serif">Хоста Зибольда</text>
+  <text x="302" y="735" font-size="10" fill="#90c880" font-family="Arial, sans-serif" font-style="italic">Hosta sieboldiana</text>
+  <circle cx="508" cy="724" r="13" fill="#2d4a2d"/>
+  <text x="508" y="730" font-size="13" fill="#7a9e72" text-anchor="middle" font-family="Arial, sans-serif">↺</text>
+  <rect x="536" y="540" width="238" height="212" rx="16" fill="#506878"/>
+  <rect x="536" y="700" width="238" height="52"  rx="16" fill="#1a2e1a"/>
+  <rect x="536" y="690" width="238" height="18"  fill="#1a2e1a"/>
+  <rect x="558" y="548" width="8" height="26" rx="4" fill="#9898d8"/>
+  <rect x="582" y="542" width="8" height="26" rx="4" fill="#8888c8"/>
+  <rect x="606" y="546" width="8" height="26" rx="4" fill="#9898d8"/>
+  <rect x="630" y="541" width="8" height="26" rx="4" fill="#8888c8"/>
+  <rect x="654" y="545" width="8" height="26" rx="4" fill="#9898d8"/>
+  <text x="552" y="718" font-size="14" font-weight="600" fill="#f0ebe0" font-family="Georgia, serif">Шалфей дубравный</text>
+  <text x="552" y="735" font-size="10" fill="#a0b0d0" font-family="Arial, sans-serif" font-style="italic">Salvia nemorosa</text>
+  <circle cx="758" cy="724" r="13" fill="#2d4a2d"/>
+  <text x="758" y="730" font-size="13" fill="#7a9e72" text-anchor="middle" font-family="Arial, sans-serif">↺</text>
+  <!-- +10 card -->
+  <rect x="786" y="540" width="278" height="212" rx="16" fill="#ede8de" stroke="#c8dbc4" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <circle cx="925" cy="628" r="36" fill="#f5f0e8" stroke="#c8dbc4" stroke-width="1"/>
+  <text x="925" y="621" font-size="28" fill="#a0b89c" text-anchor="middle" font-family="Arial, sans-serif">+</text>
+  <text x="925" y="645" font-size="16" font-weight="600" fill="#7a9e72" text-anchor="middle" font-family="Arial, sans-serif">10</text>
+  <text x="925" y="692" font-size="13" fill="#5a6e57" text-anchor="middle" font-family="Arial, sans-serif">растений ещё</text>
+  <rect x="857" y="716" width="136" height="32" rx="16" fill="#1a2e1a"/>
+  <text x="925" y="736" font-size="12" fill="#f0ebe0" text-anchor="middle" font-family="Arial, sans-serif">Показать все →</text>
+  <!-- bottom bar -->
+  <rect y="762" width="1100" height="58" fill="#ede8de"/>
+  <rect y="762" width="1100" height="1" fill="#c8dbc4"/>
+  <text x="36"  y="796" font-size="16" font-weight="600" fill="#1a2e1a" font-family="Georgia, serif">Найдено 14 растений</text>
+  <text x="36"  y="814" font-size="12" fill="#5a6e57" font-family="Arial, sans-serif">Аналогичная гармония · Зона 5b · Москва</text>
+  <rect x="728" y="774" width="160" height="38" rx="19" fill="#ffffff" stroke="#c8dbc4" stroke-width="1"/>
+  <text x="808" y="798" font-size="13" fill="#1a2e1a" text-anchor="middle" font-family="Arial, sans-serif">Скачать PDF</text>
+  <rect x="900" y="774" width="170" height="38" rx="19" fill="#1a2e1a"/>
+  <text x="985" y="798" font-size="13" fill="#f0ebe0" text-anchor="middle" font-family="Arial, sans-serif">Сохранить мудборд</text>
+</svg>
