@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Ui";
 import StepSidebar from "../components/StepSidebar";
 import { api } from "../services/api";
-import { setPalette } from "../store/flowSlice";
+import { setPalette, setImageAnalysis } from "../store/flowSlice";
 
 const MAX_SIZE = 10 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
@@ -46,9 +46,15 @@ export default function UploadPage() {
 
       if (colorsFromProcess.length) {
         dispatch(setPalette(colorsFromProcess));
+        if (process?.imageAnalysis) {
+          dispatch(setImageAnalysis(process.imageAnalysis));
+        }
       } else {
         const fallback = await api.uploadImage(file);
         dispatch(setPalette(fallback.palette || []));
+        if (fallback?.imageAnalysis) {
+          dispatch(setImageAnalysis(fallback.imageAnalysis));
+        }
       }
       navigate("/harmony");
     } catch (e) {

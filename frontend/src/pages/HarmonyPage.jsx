@@ -20,8 +20,10 @@ export default function HarmonyPage() {
   const fullPalette = [...palette, ...partners];
 
   const next = async () => {
-    await api.saveHarmony({ harmonyType: type, palette: fullPalette }).catch(() => null);
-    dispatch(setHarmony({ harmonyType: type, partners }));
+    await api
+      .saveHarmony({ harmonyType: type, palette: fullPalette, baseColor: baseColor })
+      .catch(() => null);
+    dispatch(setHarmony({ harmonyType: type, partners, baseColor }));
     navigate("/location");
   };
 

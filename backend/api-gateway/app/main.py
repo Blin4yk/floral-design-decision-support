@@ -33,7 +33,7 @@ async def gateway(path: str, request: Request):
     query = request.url.query
     full_url = f"{target}{clean_path}" + (f"?{query}" if query else "")
 
-    async with httpx.AsyncClient(timeout=20.0) as client:
+    async with httpx.AsyncClient(timeout=120.0) as client:
         try:
             response = await client.request(
                 method=request.method,

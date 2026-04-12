@@ -1,7 +1,26 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: flora-postgres
+    environment:
+      - POSTGRES_DB=flora
+      - POSTGRES_USER=flora
+      - POSTGRES_PASSWORD=flora
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/dump_plants.sql:/docker-entrypoint-initdb.d/01_dump_plants.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flora -d flora"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: frontend/Dockerfile
     container_name: flora-frontend
     environment:
       - VITE_PROXY_TARGET=http://api-gateway:8000
@@ -12,7 +31,8 @@ services:
 
   api-gateway:
     build:
-      context: ./backend/api-gateway
+      context: .
+      dockerfile: backend/api-gateway/Dockerfile
     container_name: flora-api-gateway
     ports:
       - "8000:8000"
@@ -25,35 +45,58 @@ services:
 
   auth-service:
     build:
-      context: ./backend/auth-service
+      context: .
+      dockerfile: backend/auth-service/Dockerfile
     container_name: flora-auth-service
     ports:
       - "8001:8001"
+    environment:
+      - DATABASE_URL=postgresql+psycopg://flora:flora@postgres:5432/flora
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   image-service:
     build:
-      context: ./backend/image-service
+      context: .
+      dockerfile: backend/image-service/Dockerfile
     container_name: flora-image-service
     ports:
       - "8002:8002"
 
   geo-service:
     build:
-      context: ./backend/geo-service
+      context: .
+      dockerfile: backend/geo-service/Dockerfile
     container_name: flora-geo-service
     ports:
       - "8003:8003"
 
   recommendation-service:
     build:
-      context: ./backend/recommendation-service
+      context: .
+      dockerfile: backend/recommendation-service/Dockerfile
     container_name: flora-recommendation-service
     ports:
       - "8004:8004"
+    environment:
+      - DATABASE_URL=postgresql+psycopg://flora:flora@postgres:5432/flora
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   preferences-service:
     build:
-      context: ./backend/preferences-service
+      context: .
+      dockerfile: backend/preferences-service/Dockerfile
     container_name: flora-preferences-service
     ports:
       - "8005:8005"
+    environment:
+      - DATABASE_URL=postgresql+psycopg://flora:flora@postgres:5432/flora
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

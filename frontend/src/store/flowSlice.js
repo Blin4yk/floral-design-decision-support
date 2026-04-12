@@ -4,6 +4,8 @@ const initialState = {
   palette: [],
   harmonyType: "analogous",
   harmonyPartners: [],
+  harmonyBaseColor: "",
+  imageAnalysis: null,
   location: null,
   zone: "",
   plants: []
@@ -19,6 +21,12 @@ const flowSlice = createSlice({
     setHarmony(state, action) {
       state.harmonyType = action.payload.harmonyType;
       state.harmonyPartners = action.payload.partners;
+      if (action.payload.baseColor != null) {
+        state.harmonyBaseColor = action.payload.baseColor;
+      }
+    },
+    setImageAnalysis(state, action) {
+      state.imageAnalysis = action.payload;
     },
     setLocation(state, action) {
       state.location = action.payload.location;
@@ -30,5 +38,5 @@ const flowSlice = createSlice({
   }
 });
 
-export const { setPalette, setHarmony, setLocation, setPlants } = flowSlice.actions;
+export const { setPalette, setHarmony, setImageAnalysis, setLocation, setPlants } = flowSlice.actions;
 export default flowSlice.reducer;

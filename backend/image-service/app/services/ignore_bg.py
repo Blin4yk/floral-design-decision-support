@@ -6,9 +6,7 @@ import math
 import numpy as np
 import cv2
 from sklearn.cluster import KMeans
-
-from data.data_colors import WEBCOLORS_CCS3_RGB
-
+from data_colors import WEBCOLORS_CCS3_RGB
 
 def get_color_name(rgb):
     """

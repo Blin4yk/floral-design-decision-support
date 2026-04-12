@@ -4,6 +4,7 @@ export const HARMONY_TYPES = {
   analogous: "Аналогичная",
   complementary: "Контрастная",
   triadic: "Триада",
+  tetradic: "Тетрада",
   splitComplementary: "Расщепленная"
 };
 
@@ -23,6 +24,8 @@ export const getHarmonyPartners = (baseColor, type) => {
       return [rotateHue(baseColor, 180)];
     case "triadic":
       return [rotateHue(baseColor, 120), rotateHue(baseColor, 240)];
+    case "tetradic":
+      return [rotateHue(baseColor, 90), rotateHue(baseColor, 180), rotateHue(baseColor, 270)];
     case "splitComplementary":
       return [rotateHue(baseColor, 150), rotateHue(baseColor, 210)];
     default:

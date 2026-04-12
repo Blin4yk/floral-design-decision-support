@@ -40,7 +40,9 @@ export default function LocationPage() {
         palette: [...flow.palette, ...flow.harmonyPartners],
         harmonyType: flow.harmonyType,
         zone: zoneLabel || flow.zone || "5b",
-        location: flow.location || { address }
+        location: flow.location || { address },
+        baseColor: flow.harmonyBaseColor || flow.palette[0] || "",
+        imageAnalysis: flow.imageAnalysis || undefined
       };
       const response = await api.matchPlants(payload);
       dispatch(setPlants(response.plants || []));
