@@ -8,6 +8,15 @@ export const HARMONY_TYPES = {
   splitComplementary: "Расщепленная"
 };
 
+export const ITTEN_SECTOR_COUNT = 12;
+
+export const getIttenSectorIndex = (hex) => {
+  const hue = chroma(hex).hsl()[0];
+  const normalized = Number.isNaN(hue) ? 0 : hue;
+  const step = 360 / ITTEN_SECTOR_COUNT;
+  return Math.round(normalized / step) % ITTEN_SECTOR_COUNT;
+};
+
 const rotateHue = (hex, deg) => {
   const [h, s, l] = chroma(hex).hsl();
   const hue = (h + deg + 360) % 360;

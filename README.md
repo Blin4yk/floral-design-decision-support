@@ -157,3 +157,25 @@ uvicorn app.main:app --host 0.0.0.0 --port <port>
 - Реализовать полноценный OAuth Яндекс callback flow.
 - Заменить mock-данные на реальный backend.
 - Добавить автотесты (unit + e2e).
+
+## Единый API-контракт (gateway)
+
+Фронтенд работает только через API Gateway (`http://localhost:8000`) и использует единый набор маршрутов:
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `GET /api/auth/yandex/url`
+- `POST /api/upload`
+- `POST /api/v1/images/process`
+- `GET /api/location/zone`
+- `POST /api/harmony`
+- `POST /api/match`
+- `GET /api/plants`
+- `GET /api/plants/{id}`
+- `GET|POST|DELETE /api/user/garden`
+
+Переменные окружения для этого контракта:
+
+- `frontend/.env.example`: `VITE_API_URL=http://localhost:8000`
+- `backend/api-gateway/.env.example`: `GATEWAY_CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173`

@@ -1,18 +1,18 @@
 services:
-  postgres:
+  db:
     image: postgres:16-alpine
-    container_name: flora-postgres
+    container_name: plant-db
     environment:
-      - POSTGRES_DB=flora
-      - POSTGRES_USER=flora
-      - POSTGRES_PASSWORD=flora
+      - POSTGRES_DB=plantdb
+      - POSTGRES_USER=plantuser
+      - POSTGRES_PASSWORD=plantpass
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./backend/dump_plants.sql:/docker-entrypoint-initdb.d/01_dump_plants.sql:ro
+      - plant_picker_pgdata:/var/lib/postgresql/data
+      - ./plant_picker_backend/dump_plants.sql:/docker-entrypoint-initdb.d/01_dump_plants.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U flora -d flora"]
+      test: ["CMD-SHELL", "pg_isready -U plantuser -d plantdb"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -23,80 +23,26 @@ services:
       dockerfile: frontend/Dockerfile
     container_name: flora-frontend
     environment:
-      - VITE_PROXY_TARGET=http://api-gateway:8000
+      - VITE_PROXY_TARGET=http://plant-api:8000
     ports:
       - "5173:5173"
     depends_on:
-      - api-gateway
+      - plant-api
 
-  api-gateway:
+  plant-api:
     build:
-      context: .
-      dockerfile: backend/api-gateway/Dockerfile
-    container_name: flora-api-gateway
+      context: ./plant_picker_backend
+      dockerfile: Dockerfile
+    container_name: plant-api
     ports:
       - "8000:8000"
-    depends_on:
-      - auth-service
-      - image-service
-      - geo-service
-      - recommendation-service
-      - preferences-service
-
-  auth-service:
-    build:
-      context: .
-      dockerfile: backend/auth-service/Dockerfile
-    container_name: flora-auth-service
-    ports:
-      - "8001:8001"
     environment:
-      - DATABASE_URL=postgresql+psycopg://flora:flora@postgres:5432/flora
+      - DATABASE_URL=postgresql+asyncpg://plantuser:plantpass@db:5432/plantdb
     depends_on:
-      postgres:
+      db:
         condition: service_healthy
-
-  image-service:
-    build:
-      context: .
-      dockerfile: backend/image-service/Dockerfile
-    container_name: flora-image-service
-    ports:
-      - "8002:8002"
-
-  geo-service:
-    build:
-      context: .
-      dockerfile: backend/geo-service/Dockerfile
-    container_name: flora-geo-service
-    ports:
-      - "8003:8003"
-
-  recommendation-service:
-    build:
-      context: .
-      dockerfile: backend/recommendation-service/Dockerfile
-    container_name: flora-recommendation-service
-    ports:
-      - "8004:8004"
-    environment:
-      - DATABASE_URL=postgresql+psycopg://flora:flora@postgres:5432/flora
-    depends_on:
-      postgres:
-        condition: service_healthy
-
-  preferences-service:
-    build:
-      context: .
-      dockerfile: backend/preferences-service/Dockerfile
-    container_name: flora-preferences-service
-    ports:
-      - "8005:8005"
-    environment:
-      - DATABASE_URL=postgresql+psycopg://flora:flora@postgres:5432/flora
-    depends_on:
-      postgres:
-        condition: service_healthy
+    volumes:
+      - ./plant_picker_backend/app:/app/app
 
 volumes:
-  pgdata:
+  plant_picker_pgdata:

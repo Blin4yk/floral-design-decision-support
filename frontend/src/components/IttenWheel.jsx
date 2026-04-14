@@ -1,4 +1,4 @@
-import chroma from "chroma-js";
+import { getIttenSectorIndex } from "../utils/harmony";
 
 const ITTEN_COLORS = [
   "#E8392A",
@@ -29,14 +29,7 @@ function wedgePath(cx, cy, rOuter, rInner, start, end) {
   return `M ${p1.x} ${p1.y} A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${p2.x} ${p2.y} L ${p3.x} ${p3.y} A ${rInner} ${rInner} 0 ${largeArc} 0 ${p4.x} ${p4.y} Z`;
 }
 
-function getClosestIttenIndex(hex) {
-  const hue = chroma(hex).hsl()[0];
-  const normalized = Number.isNaN(hue) ? 0 : hue;
-  const step = 360 / 12;
-  return Math.round(normalized / step) % 12;
-}
-
-export default function IttenWheel({ selectedColor, photoPalette, onSelectColor }) {
+export default function IttenWheel({ selectedColor, selectedSectorIndex, photoPalette, onSelectColor, onSelectSector }) {
   const cx = 160;
   const cy = 160;
   const outer = 140;
@@ -49,7 +42,7 @@ export default function IttenWheel({ selectedColor, photoPalette, onSelectColor 
         {ITTEN_COLORS.map((color, index) => {
           const start = -90 + index * step;
           const end = start + step;
-          const active = selectedColor && getClosestIttenIndex(selectedColor) === index;
+          const active = selectedSectorIndex === index || (selectedColor && getIttenSectorIndex(selectedColor) === index);
           return (
             <path
               key={color}
@@ -57,7 +50,7 @@ export default function IttenWheel({ selectedColor, photoPalette, onSelectColor 
               fill={color}
               stroke={active ? "#111" : "#f7f3ec"}
               strokeWidth={active ? 4 : 2}
-              onClick={() => onSelectColor(color)}
+              onClick={() => onSelectSector(index)}
               style={{ cursor: "pointer" }}
             />
           );
@@ -70,7 +63,7 @@ export default function IttenWheel({ selectedColor, photoPalette, onSelectColor 
           клик по сегменту
         </text>
         {photoPalette.map((color, i) => {
-          const idx = getClosestIttenIndex(color);
+          const idx = getIttenSectorIndex(color);
           const angle = -90 + idx * step + step / 2;
           const pos = polarToCartesian(cx, cy, outer - 10, angle);
           return (

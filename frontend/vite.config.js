@@ -8,6 +8,14 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      "/analyze": {
+        target: proxyTarget,
+        changeOrigin: true
+      },
+      "/health": {
+        target: proxyTarget,
+        changeOrigin: true
+      },
       "/api": {
         target: proxyTarget,
         changeOrigin: true

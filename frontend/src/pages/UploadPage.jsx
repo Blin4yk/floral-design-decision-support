@@ -22,13 +22,18 @@ export default function UploadPage() {
 
   const onFile = (incoming) => {
     setError("");
-    if (!incoming) return;
+    if (!incoming) {
+      setFile(null);
+      return;
+    }
     if (!ALLOWED_TYPES.includes(incoming.type)) {
       setError("Поддерживаются только JPG и PNG.");
+      setFile(null);
       return;
     }
     if (incoming.size > MAX_SIZE) {
       setError("Размер файла превышает 10 МБ.");
+      setFile(null);
       return;
     }
     setFile(incoming);
@@ -46,15 +51,11 @@ export default function UploadPage() {
 
       if (colorsFromProcess.length) {
         dispatch(setPalette(colorsFromProcess));
-        if (process?.imageAnalysis) {
-          dispatch(setImageAnalysis(process.imageAnalysis));
-        }
+        dispatch(setImageAnalysis(process?.dominantColors || null));
       } else {
         const fallback = await api.uploadImage(file);
         dispatch(setPalette(fallback.palette || []));
-        if (fallback?.imageAnalysis) {
-          dispatch(setImageAnalysis(fallback.imageAnalysis));
-        }
+        dispatch(setImageAnalysis(fallback?.dominantColors || null));
       }
       navigate("/harmony");
     } catch (e) {

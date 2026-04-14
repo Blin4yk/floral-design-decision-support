@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "../components/Ui";
@@ -8,12 +8,25 @@ import { setLocation, setPlants } from "../store/flowSlice";
 
 export default function LocationPage() {
   const [address, setAddress] = useState("");
+  const [soilType, setSoilType] = useState("Суглинок");
+  const [soilOptions, setSoilOptions] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [zoneLabel, setZoneLabel] = useState("");
   const flow = useSelector((state) => state.flow);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    api
+      .getSoilTypes()
+      .then((items) => {
+        const names = (items || []).map((item) => item?.name).filter(Boolean);
+        setSoilOptions(names);
+        setSoilType((prev) => (names.length && !names.includes(prev) ? names[0] : prev));
+      })
+      .catch(() => setSoilOptions([]));
+  }, []);
 
   const detect = () => {
     navigator.geolocation.getCurrentPosition(
@@ -36,15 +49,20 @@ export default function LocationPage() {
     setLoading(true);
     setError("");
     try {
+      const finalPalette = [...new Set([...flow.palette, ...flow.harmonyPartners])];
+      if (!finalPalette.length) {
+        throw new Error("Сначала загрузите изображение и выберите гармонию.");
+      }
       const payload = {
-        palette: [...flow.palette, ...flow.harmonyPartners],
-        harmonyType: flow.harmonyType,
-        zone: zoneLabel || flow.zone || "5b",
-        location: flow.location || { address },
-        baseColor: flow.harmonyBaseColor || flow.palette[0] || "",
-        imageAnalysis: flow.imageAnalysis || undefined
+        city: address || flow.location?.address || "Москва",
+        soil_type: soilType || "Суглинок",
+        palette: finalPalette,
+        top_n: 45
       };
       const response = await api.matchPlants(payload);
+      if (response?.zone) {
+        setZoneLabel(response.zone);
+      }
       dispatch(setPlants(response.plants || []));
       navigate("/moodboard");
     } catch (e) {
@@ -63,6 +81,20 @@ export default function LocationPage() {
         <p className="subtitle">Нужно для учета климатической зоны и сезонности посадки.</p>
         <div className="card">
           <Input label="Адрес" value={address} onChange={(e) => setAddress(e.target.value)} />
+          <label className="field">
+            <span>Тип почвы</span>
+            <select value={soilType} onChange={(e) => setSoilType(e.target.value)}>
+              {soilOptions.length ? (
+                soilOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))
+              ) : (
+                <option value={soilType}>{soilType}</option>
+              )}
+            </select>
+          </label>
           <div className="row">
             <Button variant="outline" onClick={detect}>
               Определить мое местоположение
