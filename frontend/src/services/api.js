@@ -115,6 +115,11 @@ class FastAPIClient {
     return this._requestOnce("/api/soil-types");
   }
 
+  async getRegions(query = "") {
+    const search = encodeURIComponent(query);
+    return this._requestOnce(`/api/regions?q=${search}`);
+  }
+
   uploadImage(file) {
     return this.extractColors(file);
   }

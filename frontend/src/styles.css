@@ -58,7 +58,36 @@ body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: 
 .tab.active { background: var(--green-900); color: #f0ebe0; }
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
 .input { height: 50px; border-radius: 14px; border: 1px solid var(--line); padding: 0 14px; font-size: 15px; }
+.field select { height: 50px; border-radius: 14px; border: 1px solid var(--line); padding: 0 14px; font-size: 15px; background: #fff; }
 .error { color: #b91c1c; }
+.autocomplete { position: relative; }
+.autocomplete-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  max-height: 280px;
+  overflow-y: auto;
+}
+.autocomplete-option {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--green-900);
+}
+.autocomplete-option:hover { background: #f7f3ec; }
+.autocomplete-option small { color: var(--text-muted); }
 .auth-divider { text-align: center; color: var(--text-muted); position: relative; margin: 8px 0; }
 .auth-divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--line); }
 .auth-divider span { background: #fff; position: relative; padding: 0 10px; }

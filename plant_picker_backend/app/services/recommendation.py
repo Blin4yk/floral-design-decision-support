@@ -5,20 +5,11 @@ from typing import Any, List
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ..data.regions import RUSSIAN_REGION_ZONES
 from ..schemas import PlantColorSchema, PlantResponse
-from ..utils.zone_utils import is_zone_in_range, zone_to_number
+from ..utils.zone_utils import is_zone_in_range
 
 DEFAULT_ZONE = "5b"
-
-CITY_ZONE_MAP: dict[str, str] = {
-    "москва": "5b",
-    "санкт-петербург": "5a",
-    "спб": "5a",
-    "екатеринбург": "4b",
-    "казань": "5a",
-    "новосибирск": "4a",
-    "краснодар": "6b",
-}
 
 
 def _normalize_city(city_name: str) -> str:
@@ -60,40 +51,6 @@ def _color_similarity(left_hex: str, right_hex: str) -> float:
     return max(0.0, 1.0 - (_rgb_distance(left_rgb, right_rgb) / max_distance))
 
 
-def _zone_score(user_zone: str, min_zone: str | None, max_zone: str | None) -> float:
-    if not min_zone or not max_zone:
-        return 0.5
-    if is_zone_in_range(user_zone, min_zone, max_zone):
-        return 1.0
-    try:
-        user_value = zone_to_number(user_zone)
-        min_value = zone_to_number(min_zone)
-        max_value = zone_to_number(max_zone)
-        if user_value < min_value:
-            distance = min_value - user_value
-        else:
-            distance = user_value - max_value
-        return max(0.0, 1.0 - distance / 3.0)
-    except Exception:
-        return 0.5
-
-
-def _soil_score(requested_soil_type_id: int, plant_soil_type_id: Any) -> float:
-    if plant_soil_type_id is None:
-        return 0.35
-    return 1.0 if int(plant_soil_type_id) == int(requested_soil_type_id) else 0.2
-
-
-def _care_score(care_complexity: Any) -> float:
-    if care_complexity is None:
-        return 0.6
-    try:
-        level = int(care_complexity)
-    except Exception:
-        return 0.6
-    return max(0.0, 1.0 - ((level - 1) / 4.0))
-
-
 def _color_score(palette_hexes: list[str], plant_colors: list[dict]) -> float:
     if not palette_hexes or not plant_colors:
         return 0.0
@@ -113,10 +70,27 @@ def _color_score(palette_hexes: list[str], plant_colors: list[dict]) -> float:
 
 
 async def get_city_climate_zone(db: AsyncSession, city_name: str) -> str:
-    # Таблицы cities нет в dump_plants.sql, поэтому используем карту + безопасный fallback.
     _ = db
     normalized = _normalize_city(city_name)
-    return CITY_ZONE_MAP.get(normalized, DEFAULT_ZONE)
+    for item in RUSSIAN_REGION_ZONES:
+        if _normalize_city(item["name"]) == normalized:
+            return item["zone"]
+    return DEFAULT_ZONE
+
+
+async def search_regions(query: str) -> list[dict]:
+    normalized = _normalize_city(query)
+    if not normalized:
+        return RUSSIAN_REGION_ZONES[:12]
+    starts_with = [
+        item for item in RUSSIAN_REGION_ZONES if _normalize_city(item["name"]).startswith(normalized)
+    ]
+    contains = [
+        item
+        for item in RUSSIAN_REGION_ZONES
+        if normalized in _normalize_city(item["name"]) and item not in starts_with
+    ]
+    return (starts_with + contains)[:12]
 
 
 async def get_soil_type_id(db: AsyncSession, soil_name: str) -> int:

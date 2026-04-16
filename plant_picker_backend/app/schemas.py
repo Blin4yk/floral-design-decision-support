@@ -65,5 +65,9 @@ class SoilTypeItem(BaseModel):
     id: int
     name: str
 
+class RegionItem(BaseModel):
+    name: str
+    zone: str
+
 class ErrorResponse(BaseModel):
     detail: str

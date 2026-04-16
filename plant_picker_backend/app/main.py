@@ -14,6 +14,7 @@ from .schemas import (
     ExtractColorsResponse,
     HarmonyRequest,
     HarmonyResponse,
+    RegionItem,
     RecommendRequest,
     RecommendResponse,
     SoilTypeItem,
@@ -24,6 +25,7 @@ from .services.recommendation import (
     get_soil_type_id,
     list_soil_types,
     recommend_plants_by_palette,
+    search_regions,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -84,6 +86,12 @@ async def _save_upload_file(photo: UploadFile) -> str:
 async def soil_types(db: AsyncSession = Depends(get_db)):
     soil_list = await list_soil_types(db)
     return [SoilTypeItem(id=int(soil["id"]), name=soil["name"]) for soil in soil_list]
+
+
+@app.get("/api/regions", response_model=list[RegionItem])
+async def regions(q: str = ""):
+    items = await search_regions(q)
+    return [RegionItem(name=item["name"], zone=item["zone"]) for item in items]
 
 
 @app.post("/api/colors/extract", response_model=ExtractColorsResponse, responses={400: {"model": ErrorResponse}})
