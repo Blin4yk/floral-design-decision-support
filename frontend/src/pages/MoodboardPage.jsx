@@ -39,6 +39,15 @@ export default function MoodboardPage() {
     return orderedPlants.slice(start, start + MAX_MOODBOARD_PLANTS);
   }, [orderedPlants, batchIndex]);
 
+  const visibleRangeLabel = useMemo(() => {
+    if (!filtered.length || !visiblePlants.length) {
+      return "0 из 0";
+    }
+    const start = batchIndex * MAX_MOODBOARD_PLANTS + 1;
+    const end = start + visiblePlants.length - 1;
+    return `${start}-${end} из ${filtered.length}`;
+  }, [batchIndex, filtered.length, visiblePlants.length]);
+
   const hasMultipleBatches = orderedPlants.length > MAX_MOODBOARD_PLANTS;
   const maxBatchIndex = hasMultipleBatches ? Math.ceil(orderedPlants.length / MAX_MOODBOARD_PLANTS) - 1 : 0;
 
@@ -76,7 +85,7 @@ export default function MoodboardPage() {
           <span key={`${color}-${index}`} className="swatch" style={{ backgroundColor: color }} />
         ))}
       </div>
-      <p className="subtitle">Показано: {visiblePlants.length} из {filtered.length}</p>
+      <p className="subtitle">Показано: {visibleRangeLabel}</p>
       <div className="mood-grid">
         {visiblePlants.map((plant) => (
           <article key={plant.id} className="mood-card">
