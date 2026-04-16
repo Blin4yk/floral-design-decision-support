@@ -27,6 +27,10 @@ class PlantResponse(BaseModel):
     care_difficulty: Optional[str]
     image_url: Optional[str]
     colors: List[PlantColorSchema]
+    match_percent: Optional[int] = None
+    zone: Optional[str] = None
+    color_score: Optional[float] = None
+    harmony_score: Optional[float] = None
 
 class AnalyzeResponse(BaseModel):
     dominant_colors: List[ColorInfo]
@@ -47,8 +51,11 @@ class HarmonyResponse(BaseModel):
 class RecommendRequest(BaseModel):
     city: str
     soil_type: str
-    palette: List[str]
+    photo_palette: List[str]
+    harmony_colors: List[str]
     top_n: int = 15
+    w3: float = 0.6
+    w4: float = 0.4
 
 class RecommendResponse(BaseModel):
     zone: str

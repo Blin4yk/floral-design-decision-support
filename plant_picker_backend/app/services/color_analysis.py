@@ -65,7 +65,7 @@ def get_foreground_mask(image_rgb):
     mask_fg = np.where((mask_full == 2) | (mask_full == 0), 0, 1).astype('uint8')
     return mask_fg
 
-def extract_dominant_colors(image_path, n_colors=3):
+def extract_dominant_colors(image_path, n_colors=7):
     """
     Извлекает доминирующие цвета переднего плана изображения.
     Возвращает список словарей с ключами "hex", "rgb", "weight".

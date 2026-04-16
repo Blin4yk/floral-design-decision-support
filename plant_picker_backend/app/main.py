@@ -83,7 +83,7 @@ async def _save_upload_file(photo: UploadFile) -> str:
 @app.get("/api/soil-types", response_model=list[SoilTypeItem])
 async def soil_types(db: AsyncSession = Depends(get_db)):
     soil_list = await list_soil_types(db)
-    return [SoilTypeItem(id=soil.id, name=soil.name) for soil in soil_list]
+    return [SoilTypeItem(id=int(soil["id"]), name=soil["name"]) for soil in soil_list]
 
 
 @app.post("/api/colors/extract", response_model=ExtractColorsResponse, responses={400: {"model": ErrorResponse}})
@@ -116,9 +116,12 @@ async def recommend(payload: RecommendRequest, db: AsyncSession = Depends(get_db
         soil_id = await get_soil_type_id(db, payload.soil_type)
         plants = await recommend_plants_by_palette(
             db=db,
-            palette_hexes=payload.palette,
+            photo_palette_hexes=payload.photo_palette,
+            harmony_hexes=payload.harmony_colors,
             user_zone=user_zone,
             soil_type_id=soil_id,
+            w3=payload.w3,
+            w4=payload.w4,
             top_n=max(1, min(payload.top_n, 50)),
         )
         return RecommendResponse(zone=user_zone, recommended_plants=plants)
@@ -141,12 +144,15 @@ async def analyze_photo(
         harmony_list = _harmony_from_hex(base_hex, "complementary")
         user_zone = await get_city_climate_zone(db, city)
         soil_id = await get_soil_type_id(db, soil_type)
-        palette = [color["hex"].upper() for color in dominant_colors_info] + harmony_list
+        photo_palette = [color["hex"].upper() for color in dominant_colors_info]
         plants = await recommend_plants_by_palette(
             db=db,
-            palette_hexes=palette,
+            photo_palette_hexes=photo_palette,
+            harmony_hexes=harmony_list,
             user_zone=user_zone,
             soil_type_id=soil_id,
+            w3=0.6,
+            w4=0.4,
             top_n=10,
         )
         return AnalyzeResponse(

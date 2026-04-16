@@ -31,7 +31,8 @@ function mapPlant(plant, index) {
     care_difficulty: plant?.care_difficulty || null,
     image_url: plant?.image_url || null,
     colors: plant?.colors || [],
-    matchPercent: 0
+    matchPercent: Number(plant?.match_percent ?? plant?.matchPercent ?? 0),
+    zone: plant?.zone || null
   };
 }
 
@@ -134,8 +135,11 @@ class FastAPIClient {
       body: JSON.stringify({
         city: payload?.city || "Москва",
         soil_type: payload?.soil_type || "Суглинок",
-        palette: payload?.palette || [],
-        top_n: payload?.top_n || 30
+        photo_palette: payload?.photo_palette || [],
+        harmony_colors: payload?.harmony_colors || [],
+        top_n: payload?.top_n || 30,
+        w3: payload?.w3 ?? 0.6,
+        w4: payload?.w4 ?? 0.4
       })
     }).then((response) => ({
       zone: response?.zone || "5b",

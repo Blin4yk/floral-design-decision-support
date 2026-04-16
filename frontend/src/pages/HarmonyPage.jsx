@@ -6,20 +6,16 @@ import StepSidebar from "../components/StepSidebar";
 import IttenWheel from "../components/IttenWheel";
 import { api } from "../services/api";
 import { setHarmony } from "../store/flowSlice";
-import { getHarmonyPartners, getIttenSectorIndex, HARMONY_TYPES, ITTEN_SECTOR_COUNT } from "../utils/harmony";
+import { getHarmonyPartners, getIttenSectorIndex, HARMONY_TYPES, ITTEN_COLORS } from "../utils/harmony";
 
-const hueDistance = (a, b) => {
-  const delta = Math.abs(a - b) % 360;
-  return Math.min(delta, 360 - delta);
-};
-
-const getSectorCenterHue = (sectorIndex) => ((sectorIndex % ITTEN_SECTOR_COUNT) * 360) / ITTEN_SECTOR_COUNT;
+const normalizeHex = (value) => String(value || "").toUpperCase();
 
 export default function HarmonyPage() {
   const palette = useSelector((state) => state.flow.palette);
   const [type, setType] = useState("analogous");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSectorIndex, setSelectedSectorIndex] = useState(null);
+  const [previewPartners, setPreviewPartners] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,32 +37,44 @@ export default function HarmonyPage() {
 
   const selectSector = (sectorIndex) => {
     setSelectedSectorIndex(sectorIndex);
-    if (!palette.length) {
-      return;
-    }
-    const colorsInSector = palette.filter((color) => getIttenSectorIndex(color) === sectorIndex);
-    if (colorsInSector.length) {
-      setSelectedColor(colorsInSector[0]);
-      return;
-    }
-    const targetHue = getSectorCenterHue(sectorIndex);
-    const closestByHue = [...palette]
-      .map((color) => ({ color, hue: getSectorCenterHue(getIttenSectorIndex(color)) }))
-      .sort((a, b) => hueDistance(a.hue, targetHue) - hueDistance(b.hue, targetHue))[0];
-    if (closestByHue) {
-      setSelectedColor(closestByHue.color);
-    }
+    setSelectedColor(ITTEN_COLORS[sectorIndex] || palette[0] || "");
   };
 
-  const baseColor = selectedColor || palette[0];
-  const partners = useMemo(() => getHarmonyPartners(baseColor, type), [baseColor, type]);
-  const fullPalette = [...new Set([...palette, ...partners])];
+  const baseColor = useMemo(() => normalizeHex(selectedColor || palette[0]), [selectedColor, palette]);
+
+  useEffect(() => {
+    if (!baseColor) {
+      setPreviewPartners([]);
+      return;
+    }
+
+    const fallbackPartners = getHarmonyPartners(baseColor, type).map((item) => normalizeHex(item));
+    setPreviewPartners(fallbackPartners);
+
+    let cancelled = false;
+    api
+      .saveHarmony({ harmonyType: type, baseColor })
+      .then((response) => {
+        if (cancelled) return;
+        const backendPartners = (response?.harmony_colors || []).map((item) => normalizeHex(item));
+        if (backendPartners.length) {
+          setPreviewPartners(backendPartners);
+        }
+      })
+      .catch(() => null);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [baseColor, type]);
+
+  const fullPalette = useMemo(
+    () => [...new Set([...palette.map((item) => normalizeHex(item)), ...previewPartners])],
+    [palette, previewPartners]
+  );
 
   const next = async () => {
-    const response = await api.saveHarmony({ harmonyType: type, baseColor }).catch(() => null);
-    const backendPartners = response?.harmony_colors || [];
-    const nextPartners = backendPartners.length ? backendPartners : partners;
-    dispatch(setHarmony({ harmonyType: type, partners: nextPartners, baseColor }));
+    dispatch(setHarmony({ harmonyType: type, partners: previewPartners, baseColor }));
     navigate("/location");
   };
 

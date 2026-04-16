@@ -49,15 +49,19 @@ export default function LocationPage() {
     setLoading(true);
     setError("");
     try {
-      const finalPalette = [...new Set([...flow.palette, ...flow.harmonyPartners])];
-      if (!finalPalette.length) {
+      const photoPalette = [...new Set(flow.palette || [])];
+      const harmonyColors = [...new Set(flow.harmonyPartners || [])];
+      if (!photoPalette.length) {
         throw new Error("Сначала загрузите изображение и выберите гармонию.");
       }
       const payload = {
         city: address || flow.location?.address || "Москва",
         soil_type: soilType || "Суглинок",
-        palette: finalPalette,
-        top_n: 45
+        photo_palette: photoPalette,
+        harmony_colors: harmonyColors,
+        top_n: 45,
+        w3: 0.6,
+        w4: 0.4
       };
       const response = await api.matchPlants(payload);
       if (response?.zone) {

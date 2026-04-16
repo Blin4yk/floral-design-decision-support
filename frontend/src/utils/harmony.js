@@ -8,6 +8,21 @@ export const HARMONY_TYPES = {
   splitComplementary: "Расщепленная"
 };
 
+export const ITTEN_COLORS = [
+  "#E8392A",
+  "#F06020",
+  "#F09020",
+  "#E8C020",
+  "#D8D020",
+  "#90C030",
+  "#38A840",
+  "#20A898",
+  "#2878C8",
+  "#6848B8",
+  "#9878B8",
+  "#C8706A"
+];
+
 export const ITTEN_SECTOR_COUNT = 12;
 
 export const getIttenSectorIndex = (hex) => {

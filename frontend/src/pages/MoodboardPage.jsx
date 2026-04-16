@@ -12,15 +12,6 @@ const FILTERS = [
 
 const MAX_MOODBOARD_PLANTS = 15;
 
-const shuffle = (items) => {
-  const copy = [...items];
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-};
-
 export default function MoodboardPage() {
   const [filter, setFilter] = useState("all");
   const [orderedPlants, setOrderedPlants] = useState([]);
@@ -34,7 +25,9 @@ export default function MoodboardPage() {
   }, [filter, plants]);
 
   useEffect(() => {
-    setOrderedPlants(shuffle(filtered));
+    setOrderedPlants(
+      [...filtered].sort((left, right) => Number(right?.matchPercent || 0) - Number(left?.matchPercent || 0))
+    );
     setBatchIndex(0);
   }, [filtered]);
 
@@ -53,12 +46,7 @@ export default function MoodboardPage() {
     if (!hasMultipleBatches) {
       return;
     }
-    if (batchIndex < maxBatchIndex) {
-      setBatchIndex((prev) => prev + 1);
-      return;
-    }
-    setOrderedPlants(shuffle(orderedPlants));
-    setBatchIndex(0);
+    setBatchIndex((prev) => (prev < maxBatchIndex ? prev + 1 : 0));
   };
 
   return (
