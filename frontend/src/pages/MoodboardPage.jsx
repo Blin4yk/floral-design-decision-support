@@ -12,6 +12,30 @@ const FILTERS = [
 
 const MAX_MOODBOARD_PLANTS = 15;
 
+const truncateText = (value, maxLength = 140) => {
+  const text = String(value || "").trim();
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trimEnd()}...`;
+};
+
+const getMatchLabel = (matchPercent) => {
+  if (matchPercent >= 85) return "Очень близкое попадание в палитру участка.";
+  if (matchPercent >= 70) return "Хорошо поддерживает общую цветовую композицию.";
+  if (matchPercent >= 55) return "Подходит как мягкий акцент в подборке.";
+  return "Может использоваться как дополнительный оттеночный акцент.";
+};
+
+const getPlantDescription = (plant) => {
+  if (plant?.description) {
+    return truncateText(plant.description, 150);
+  }
+
+  const zone = plant?.zone || "5b";
+  const care = plant?.care_difficulty || "средней сложности";
+  return `Растение подходит для зоны ${zone} и требует ухода ${care}. Может использоваться для поддержания общей цветовой палитры участка.`;
+};
+
 export default function MoodboardPage() {
   const [filter, setFilter] = useState("all");
   const [orderedPlants, setOrderedPlants] = useState([]);
@@ -91,12 +115,38 @@ export default function MoodboardPage() {
           <article key={plant.id} className="mood-card">
             <div className="mood-card-top">
               <span className="match-chip">{plant.matchPercent || 0}% совп.</span>
+              <div className="mood-card-badges">
+                <span className="mood-badge">Зона {plant.zone || "5b"}</span>
+                <span className="mood-badge">{plant.care_difficulty || "Уход: средний"}</span>
+              </div>
             </div>
             <div className="mood-card-body">
               <h3>{plant.nameRu}</h3>
-              <p>{plant.nameLat}</p>
-              <p>Зона: {plant.zone || "5b"} · Полив: умеренный</p>
-              <Link to={`/plant/${plant.id}`} className="btn btn-outline">Подробнее →</Link>
+              {!!plant.nameLat && <p className="mood-card-latin">{plant.nameLat}</p>}
+              <p className="mood-card-summary">{getMatchLabel(Number(plant.matchPercent || 0))}</p>
+              <p className="mood-card-description">{getPlantDescription(plant)}</p>
+              <div className="mood-card-meta">
+                <span>Зона зимостойкости: {plant.zone || "5b"}</span>
+                <span>Уход: {plant.care_difficulty || "средний"}</span>
+                {plant.height_cm ? <span>Высота до {plant.height_cm} см</span> : <span>Высота уточняется</span>}
+                {plant.width_cm ? <span>Ширина до {plant.width_cm} см</span> : <span>Ширина зависит от сорта</span>}
+              </div>
+              {!!plant.colors?.length && (
+                <div className="mood-card-colors">
+                  <span className="mood-card-colors-label">Цвета растения</span>
+                  <div className="mood-card-swatches">
+                    {plant.colors.slice(0, 5).map((color) => (
+                      <span
+                        key={`${plant.id}-${color.hex_code}`}
+                        className="mood-card-swatch"
+                        style={{ backgroundColor: color.hex_code }}
+                        title={color.name || color.hex_code}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+              <Link to={`/plant/${plant.id}`} className="btn btn-outline mood-card-link">Подробнее →</Link>
             </div>
           </article>
         ))}

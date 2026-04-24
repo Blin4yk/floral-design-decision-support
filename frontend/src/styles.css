@@ -113,11 +113,24 @@ body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: 
 
 /* Moodboard 06 */
 .mood-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.mood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 12px; }
-.mood-card { border-radius: 18px; overflow: hidden; background: var(--green-900); color: #f0ebe0; min-height: 280px; }
-.mood-card-top { height: 160px; background: linear-gradient(180deg, #88a8d0, #5a7840); padding: 10px; }
-.mood-card-body { padding: 14px; }
+.mood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px; }
+.mood-card { border-radius: 22px; overflow: hidden; background: var(--green-900); color: #f0ebe0; min-height: 400px; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(26, 46, 26, 0.12); }
+.mood-card-top { min-height: 168px; background: linear-gradient(180deg, #88a8d0, #5a7840); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; }
+.mood-card-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.mood-card-body h3 { margin: 0; font-family: Georgia, serif; font-size: 28px; line-height: 1.1; }
+.mood-card-body p { margin: 0; }
 .match-chip { width: fit-content; padding: 6px 10px; border-radius: 999px; background: #7a9e72; color: var(--green-900); font-size: 11px; font-weight: 700; }
+.mood-card-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.mood-badge { width: fit-content; padding: 6px 10px; border-radius: 999px; background: rgba(247, 243, 236, 0.16); border: 1px solid rgba(247, 243, 236, 0.28); color: #f0ebe0; font-size: 12px; }
+.mood-card-latin { color: #c8dbc4; font-size: 14px; }
+.mood-card-summary { color: #f0ebe0; font-size: 15px; line-height: 1.5; }
+.mood-card-description { color: #dfe8db; font-size: 14px; line-height: 1.6; }
+.mood-card-meta { display: grid; gap: 8px; padding-top: 4px; color: #d7e3d3; font-size: 13px; line-height: 1.5; }
+.mood-card-colors { margin-top: auto; display: grid; gap: 8px; }
+.mood-card-colors-label { color: #c8dbc4; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.mood-card-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.mood-card-swatch { width: 26px; height: 26px; border-radius: 8px; border: 1px solid rgba(247, 243, 236, 0.28); }
+.mood-card-link { margin-top: 4px; align-self: flex-start; }
 
 /* Plant 07 */
 .plant-layout { display: grid; grid-template-columns: 430px 1fr; min-height: calc(100vh - 64px); }
