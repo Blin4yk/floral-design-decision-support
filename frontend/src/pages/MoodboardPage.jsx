@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "../components/Ui";
 import { exportElementToPdf } from "../utils/pdf";
+import { api } from "../services/api";
 
 const FILTERS = [
   { id: "all", label: "Все" },
@@ -40,7 +41,10 @@ export default function MoodboardPage() {
   const [filter, setFilter] = useState("all");
   const [orderedPlants, setOrderedPlants] = useState([]);
   const [batchIndex, setBatchIndex] = useState(0);
-  const { plants, palette, harmonyPartners } = useSelector((state) => state.flow);
+  const [saveMessage, setSaveMessage] = useState("");
+  const [saving, setSaving] = useState(false);
+  const flow = useSelector((state) => state.flow);
+  const { plants, palette, harmonyPartners } = flow;
 
   const filtered = useMemo(() => {
     if (filter === "flowering") return plants.filter((p) => p.flowering);
@@ -82,10 +86,50 @@ export default function MoodboardPage() {
     setBatchIndex((prev) => (prev < maxBatchIndex ? prev + 1 : 0));
   };
 
+  const saveMoodboard = async () => {
+    if (!plants.length) {
+      setSaveMessage("Сначала сформируйте подборку растений.");
+      return;
+    }
+
+    setSaving(true);
+    setSaveMessage("");
+    try {
+      const locationLabel = flow.location?.address || flow.zone || "участок";
+      const timestamp = new Date();
+      const title = `Подборка · ${locationLabel} · ${timestamp.toLocaleDateString("ru-RU")}`;
+
+      await api.saveMoodboard({
+        title,
+        createdAt: timestamp.toISOString(),
+        snapshot: {
+          ...flow,
+          plants,
+          palette,
+          harmonyPartners
+        }
+      });
+      setSaveMessage("Подборка сохранена. Ее можно открыть в разделе «Мой сад».");
+    } catch (error) {
+      setSaveMessage(error?.message || "Не удалось сохранить мудборд.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <section className="page" id="moodboard-export">
       <h1 className="page-title">Мудборд</h1>
       <p className="subtitle">Подбор растений по палитре, гармонии и локации (до 15 карточек за раз).</p>
+      {!!flow.photoPreview && (
+        <div className="moodboard-cover">
+          <img src={flow.photoPreview} alt="Загруженный участок" className="moodboard-cover-image" />
+          <div className="moodboard-cover-copy">
+            <strong>Исходное фото участка</strong>
+            <span>Снимок сохранён в текущем подборе, чтобы было проще сравнить палитру и рекомендации.</span>
+          </div>
+        </div>
+      )}
       <div className="mood-toolbar">
         <div className="row wrap">
           {FILTERS.map((item) => (
@@ -101,9 +145,12 @@ export default function MoodboardPage() {
           <Button variant="outline" onClick={showAnotherSelection} disabled={!hasMultipleBatches}>
             Показать другую подборку
           </Button>
-          <Button>Сохранить мудборд</Button>
+          <Button onClick={saveMoodboard} disabled={!plants.length || saving}>
+            {saving ? "Сохраняем..." : "Сохранить мудборд"}
+          </Button>
         </div>
       </div>
+      {!!saveMessage && <p className="subtitle">{saveMessage}</p>}
       <div className="palette">
         {[...palette, ...harmonyPartners].map((color, index) => (
           <span key={`${color}-${index}`} className="swatch" style={{ backgroundColor: color }} />

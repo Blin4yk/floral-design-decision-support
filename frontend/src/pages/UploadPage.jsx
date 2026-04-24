@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Ui";
 import StepSidebar from "../components/StepSidebar";
 import { api } from "../services/api";
-import { setPalette, setImageAnalysis } from "../store/flowSlice";
+import { setPalette, setImageAnalysis, setPhotoPreview } from "../store/flowSlice";
 
 const MAX_SIZE = 10 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
@@ -15,6 +15,7 @@ const toHex = (rgb) =>
 
 export default function UploadPage() {
   const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ export default function UploadPage() {
     setError("");
     if (!incoming) {
       setFile(null);
+      setPreviewUrl("");
+      dispatch(setPhotoPreview(""));
       return;
     }
     if (!ALLOWED_TYPES.includes(incoming.type)) {
@@ -37,6 +40,13 @@ export default function UploadPage() {
       return;
     }
     setFile(incoming);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const nextPreviewUrl = typeof reader.result === "string" ? reader.result : "";
+      setPreviewUrl(nextPreviewUrl);
+      dispatch(setPhotoPreview(nextPreviewUrl));
+    };
+    reader.readAsDataURL(incoming);
   };
 
   const upload = async () => {
@@ -82,6 +92,15 @@ export default function UploadPage() {
             </ul>
           </div>
           {file && <p>Выбран файл: {file.name}</p>}
+          {previewUrl && (
+            <div className="upload-preview">
+              <div className="upload-preview-header">
+                <strong>Предпросмотр выбранного фото</strong>
+                <span>Проверьте, что загружен нужный снимок участка</span>
+              </div>
+              <img src={previewUrl} alt="Предпросмотр выбранного участка" className="upload-preview-image" />
+            </div>
+          )}
           {error && <p className="error">{error}</p>}
           <Button onClick={upload} disabled={!file || loading}>
             {loading ? "Загрузка..." : "Загрузить и продолжить"}

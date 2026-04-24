@@ -1,4 +1,5 @@
 const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "");
+const MOODBOARDS_STORAGE_KEY = "flora_saved_moodboards";
 
 function createRequestError(payload) {
   const detail = payload?.detail;
@@ -20,11 +21,25 @@ function normalizeAuthPayload(payload) {
   return { token, user };
 }
 
+function readMoodboards() {
+  try {
+    const raw = localStorage.getItem(MOODBOARDS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeMoodboards(items) {
+  localStorage.setItem(MOODBOARDS_STORAGE_KEY, JSON.stringify(items));
+}
+
 function mapPlant(plant, index) {
   return {
     id: plant?.id ?? index + 1,
     nameRu: plant?.name || "Без названия",
-    nameLat: "",
+    nameLat: plant?.name_latin || plant?.nameLat || "",
     description: plant?.description || "",
     height_cm: plant?.height_cm || null,
     width_cm: plant?.width_cm || null,
@@ -32,7 +47,9 @@ function mapPlant(plant, index) {
     image_url: plant?.image_url || null,
     colors: plant?.colors || [],
     matchPercent: Number(plant?.match_percent ?? plant?.matchPercent ?? 0),
-    zone: plant?.zone || null
+    zone: plant?.zone || null,
+    colorScore: Number(plant?.color_score ?? plant?.colorScore ?? 0),
+    harmonyScore: Number(plant?.harmony_score ?? plant?.harmonyScore ?? 0)
   };
 }
 
@@ -157,17 +174,36 @@ class FastAPIClient {
     return Promise.resolve({
       plant: {
         id: Number(id),
-        nameRu: "Растение",
+        nameRu: "Декоративное растение",
         nameLat: "",
-        description: "Карточка растения доступна после подбора в мудборде.",
+        description: "Подробная карточка будет сформирована после подбора растений в мудборде. Здесь можно посмотреть основные характеристики, рекомендации по размещению и совместимость в композиции.",
         compatibility: [],
-        zone: "5b"
+        zone: "5b",
+        care_difficulty: "средний",
+        height_cm: 90,
+        width_cm: 50,
+        matchPercent: 72,
+        colorScore: 0.72,
+        harmonyScore: 0.64,
+        colors: []
       }
     });
   }
 
   getMyGarden() {
-    return Promise.resolve({ plants: [] });
+    return Promise.resolve({ moodboards: readMoodboards() });
+  }
+
+  saveMoodboard(payload) {
+    const moodboards = readMoodboards();
+    const nextItem = {
+      id: payload?.id || Date.now(),
+      title: payload?.title || "Сохраненный мудборд",
+      createdAt: payload?.createdAt || new Date().toISOString(),
+      snapshot: payload?.snapshot || {}
+    };
+    writeMoodboards([nextItem, ...moodboards]);
+    return Promise.resolve({ moodboard: nextItem });
   }
 
   addToGarden(plantId) {
@@ -176,7 +212,8 @@ class FastAPIClient {
   }
 
   removeFromGarden(plantId) {
-    void plantId;
+    const moodboards = readMoodboards().filter((item) => Number(item?.id) !== Number(plantId));
+    writeMoodboards(moodboards);
     return Promise.resolve({ success: true });
   }
 
