@@ -20,6 +20,18 @@ const getPlantToneText = (plant) => {
   return `Подходит для зоны ${zone}, сохраняет декоративность в садовых композициях и относится к растениям ухода ${care}.`;
 };
 
+const getPlantImageUrl = (plant) => {
+  const rawUrl = String(plant?.image_url || "").trim();
+  if (!rawUrl) return "";
+  if (/^https?:\/\//i.test(rawUrl) || rawUrl.startsWith("data:")) {
+    return rawUrl;
+  }
+  if (rawUrl.startsWith("/")) {
+    return api.baseUrl ? `${api.baseUrl}${rawUrl}` : rawUrl;
+  }
+  return `${api.baseUrl}/${rawUrl}`.replace(/([^:]\/)\/+/g, "$1");
+};
+
 const getPlantPlacementText = (plant) => {
   if (plant?.height_cm && plant?.width_cm) {
     return `Рекомендуется как акцент или заполняющий элемент: высота до ${plant.height_cm} см, ширина до ${plant.width_cm} см.`;
@@ -105,6 +117,9 @@ export default function PlantPage() {
   return (
     <section className="plant-layout" id="plant-export">
       <div className="plant-photo">
+        {getPlantImageUrl(plant) && (
+          <img src={getPlantImageUrl(plant)} alt={plant.nameRu} className="plant-detail-image" />
+        )}
         <span className="plant-photo-chip">{plant.matchPercent || 0}% совпадение с подборкой</span>
         {!!plant.nameLat && <p className="subtitle">{plant.nameLat}</p>}
         <h2 className="page-title" style={{ color: "#f0ebe0", fontSize: "44px" }}>{plant.nameRu}</h2>

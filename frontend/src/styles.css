@@ -159,7 +159,10 @@ body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: 
 
 /* Plant 07 */
 .plant-layout { display: grid; grid-template-columns: 430px 1fr; min-height: calc(100vh - 64px); }
-.plant-photo { background: linear-gradient(180deg, #3f6841 0%, #1f3520 100%); color: #f0ebe0; padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; }
+.plant-photo { position: relative; overflow: hidden; background: linear-gradient(180deg, #3f6841 0%, #1f3520 100%); color: #f0ebe0; padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; }
+.plant-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31, 53, 32, 0.1) 0%, rgba(31, 53, 32, 0.78) 100%); }
+.plant-photo > :not(.plant-detail-image) { position: relative; z-index: 1; }
+.plant-detail-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .plant-photo-chip { width: fit-content; padding: 8px 12px; border-radius: 999px; background: rgba(240, 235, 224, 0.16); border: 1px solid rgba(240, 235, 224, 0.24); font-size: 12px; font-weight: 700; }
 .plant-photo-text { margin: 0; color: #dbe7d8; line-height: 1.6; max-width: 320px; }
 .plant-info { padding: 28px 32px; display: flex; flex-direction: column; gap: 18px; }
