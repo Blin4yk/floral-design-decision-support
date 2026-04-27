@@ -1,5 +1,7 @@
 # Логика подбора растений
+import json
 from math import sqrt
+from pathlib import Path
 from typing import Any, List
 
 from sqlalchemy import text
@@ -10,6 +12,30 @@ from ..schemas import PlantColorSchema, PlantResponse
 from ..utils.zone_utils import is_zone_in_range
 
 DEFAULT_ZONE = "5b"
+PLANT_PHOTO_MAP_PATH = Path(__file__).resolve().parents[2] / "photos" / "plant_photo_map.json"
+PHOTOS_BASE_URL = "/photos"
+
+
+def _load_plant_photo_map() -> dict[str, str]:
+    try:
+        with PLANT_PHOTO_MAP_PATH.open("r", encoding="utf-8") as source:
+            payload = json.load(source)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+PLANT_PHOTO_MAP = _load_plant_photo_map()
+
+
+def _build_local_image_url(plant_id: Any, fallback_url: Any) -> str | None:
+    _ = fallback_url
+    mapped_name = PLANT_PHOTO_MAP.get(str(plant_id))
+    if mapped_name:
+        clean_name = str(mapped_name).strip().lstrip("/\\")
+        if clean_name:
+            return f"{PHOTOS_BASE_URL}/{clean_name}"
+    return None
 
 
 def _normalize_city(city_name: str) -> str:
@@ -215,7 +241,7 @@ async def recommend_plants_by_palette(
                 height_cm=int(row["height_max"]) if row.get("height_max") is not None else None,
                 width_cm=int(row["width_max"]) if row.get("width_max") is not None else None,
                 care_difficulty=_care_level_to_text(row.get("care_complexity")),
-                image_url=row.get("image_url"),
+                image_url=_build_local_image_url(row.get("id"), row.get("image_url")),
                 colors=colors,
                 match_percent=max(1, min(100, int(round(total_score * 100)))),
                 zone=user_zone,

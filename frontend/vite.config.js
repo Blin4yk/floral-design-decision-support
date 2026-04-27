@@ -19,6 +19,10 @@ export default defineConfig({
       "/api": {
         target: proxyTarget,
         changeOrigin: true
+      },
+      "/photos": {
+        target: proxyTarget,
+        changeOrigin: true
       }
     }
   }

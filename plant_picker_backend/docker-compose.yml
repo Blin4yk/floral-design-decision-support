@@ -30,6 +30,7 @@ services:
     # Монтируем код внутрь пакета: /app/app/..., иначе затирается /app и пропадает модуль ``app``
     volumes:
       - ./app:/app/app
+      - ./photos:/app/photos:ro
 
 volumes:
   plant_picker_pgdata:

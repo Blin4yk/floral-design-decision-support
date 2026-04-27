@@ -1,10 +1,13 @@
 # Точка входа FastAPI
 import colorsys
 import logging
+import mimetypes
 import os
 import tempfile
+from pathlib import Path
 
 from fastapi import FastAPI, UploadFile, File, Form, Depends, HTTPException
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .database import get_db
@@ -32,6 +35,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Plant Picker API", version="1.0.0")
+
+PHOTOS_DIR = Path(__file__).resolve().parents[1] / "photos"
+mimetypes.add_type("image/webp", ".webp")
+mimetypes.add_type("image/jpeg", ".jpeg")
+mimetypes.add_type("image/jpeg", ".jpg")
+mimetypes.add_type("image/png", ".png")
+if PHOTOS_DIR.exists():
+    app.mount("/photos", StaticFiles(directory=str(PHOTOS_DIR)), name="photos")
 
 @app.get("/health")
 async def health_check():

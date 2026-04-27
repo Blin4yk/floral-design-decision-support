@@ -43,6 +43,7 @@ services:
         condition: service_healthy
     volumes:
       - ./plant_picker_backend/app:/app/app
+      - ./plant_picker_backend/photos:/app/photos:ro
 
 volumes:
   plant_picker_pgdata:

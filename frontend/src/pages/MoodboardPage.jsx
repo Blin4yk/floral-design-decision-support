@@ -37,6 +37,18 @@ const getPlantDescription = (plant) => {
   return `Растение подходит для зоны ${zone} и требует ухода ${care}. Может использоваться для поддержания общей цветовой палитры участка.`;
 };
 
+const getPlantImageUrl = (plant) => {
+  const rawUrl = String(plant?.image_url || "").trim();
+  if (!rawUrl) return "";
+  if (/^https?:\/\//i.test(rawUrl) || rawUrl.startsWith("data:")) {
+    return rawUrl;
+  }
+  if (rawUrl.startsWith("/")) {
+    return api.baseUrl ? `${api.baseUrl}${rawUrl}` : rawUrl;
+  }
+  return `${api.baseUrl}/${rawUrl}`.replace(/([^:]\/)\/+/g, "$1");
+};
+
 export default function MoodboardPage() {
   const [filter, setFilter] = useState("all");
   const [orderedPlants, setOrderedPlants] = useState([]);
@@ -161,6 +173,11 @@ export default function MoodboardPage() {
         {visiblePlants.map((plant) => (
           <article key={plant.id} className="mood-card">
             <div className="mood-card-top">
+              {getPlantImageUrl(plant) ? (
+                <img src={getPlantImageUrl(plant)} alt={plant.nameRu} className="mood-card-image" loading="lazy" />
+              ) : (
+                <div className="mood-card-image mood-card-image-placeholder" aria-hidden="true" />
+              )}
               <span className="match-chip">{plant.matchPercent || 0}% совп.</span>
               <div className="mood-card-badges">
                 <span className="mood-badge">Зона {plant.zone || "5b"}</span>
