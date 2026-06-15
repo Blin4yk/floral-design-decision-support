@@ -1,0 +1,41 @@
+flowchart LR
+  subgraph Docker["Docker Compose"]
+    subgraph Frontend["Контейнер фронтенда: React + Vite"]
+      Pages["Страницы интерфейса\nзагрузка, гармония, локация, мудборд"]
+      Store["Хранилище Redux Toolkit\nпалитра, гармония, зона, растения"]
+      Client["FastAPIClient\nfetch-адаптер"]
+      Local["localStorage\nсохраненные мудборды"]
+      Pages --> Store
+      Pages --> Client
+      Client --> Local
+    end
+
+    subgraph Backend["Контейнер бэкенда: FastAPI + Uvicorn"]
+      Api["Приложение FastAPI\nREST-эндпоинты"]
+      Schemas["Схемы Pydantic"]
+      Color["Анализ цвета\nOpenCV + KMeans + NumPy"]
+      Harmony["Построение гармонии\nповороты HSV по Иттену"]
+      Recommend["Сервис рекомендаций\nоценка климата, почвы и цвета"]
+      DbAccess["Асинхронный SQLAlchemy"]
+      Photos["Каталог статических фото\n/photos + plant_photo_map.json"]
+      Shared["Общие алгоритмы\nflora_recommend"]
+      Api --> Schemas
+      Api --> Color
+      Api --> Harmony
+      Api --> Recommend
+      Recommend --> DbAccess
+      Recommend --> Photos
+      Recommend --> Shared
+    end
+
+    subgraph Data["Слой данных"]
+      Postgres[(PostgreSQL\nрастения, цвета, типы почв)]
+      Dump["dump_plants.sql"]
+      PhotoFiles["смонтированные фото"]
+      Dump -. инициализация .-> Postgres
+    end
+  end
+
+  Client -- "HTTP /api/*" --> Api
+  DbAccess -- "асинхронный SQL" --> Postgres
+  Photos --> PhotoFiles

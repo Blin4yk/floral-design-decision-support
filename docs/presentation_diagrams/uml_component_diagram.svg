@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050">
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #000000; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 18px; }
+      .head { font-size: 22px; font-weight: 700; }
+      .label { font-size: 18px; font-weight: 700; }
+      .small { font-size: 15px; }
+      .tiny { font-size: 13px; }
+      .package { fill: #ffffff; stroke: #000000; stroke-width: 3; }
+      .tab { fill: #ffffff; stroke: #000000; stroke-width: 3; }
+      .component { fill: #ffffff; stroke: #000000; stroke-width: 2.2; }
+      .main { fill: #ffffff; stroke: #000000; stroke-width: 3; }
+      .note { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .iface { fill: #ffffff; stroke: #000000; stroke-width: 2.2; }
+      .line { stroke: #000000; stroke-width: 2.4; fill: none; }
+      .arrow { stroke: #000000; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .dep { stroke: #000000; stroke-width: 2.2; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#000000"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1050" fill="#ffffff"/>
+  <text class="title" x="800" y="58" text-anchor="middle">UML-&#1076;&#1080;&#1072;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1082;&#1086;&#1084;&#1087;&#1086;&#1085;&#1077;&#1085;&#1090;&#1086;&#1074; Flora Vision</text>
+  <text class="subtitle" x="800" y="88" text-anchor="middle">&#1050;&#1086;&#1084;&#1087;&#1086;&#1085;&#1077;&#1085;&#1090;&#1099; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1099; &#1087;&#1086;&#1076;&#1073;&#1086;&#1088;&#1072; &#1088;&#1072;&#1089;&#1090;&#1077;&#1085;&#1080;&#1081; &#1080; &#1080;&#1093; &#1089;&#1074;&#1103;&#1079;&#1080;</text>
+
+  <rect class="package" x="60" y="140" width="425" height="765" rx="10"/>
+  <rect class="tab" x="60" y="140" width="180" height="44" rx="6"/>
+  <text class="head" x="150" y="169" text-anchor="middle">&#1060;&#1088;&#1086;&#1085;&#1090;&#1077;&#1085;&#1076;</text>
+
+  <rect class="main" x="110" y="235" width="325" height="86" rx="8"/>
+  <rect class="main" x="125" y="250" width="28" height="15"/>
+  <rect class="main" x="125" y="272" width="28" height="15"/>
+  <text class="label" x="285" y="270" text-anchor="middle">React-&#1087;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;</text>
+  <text class="small" x="285" y="296" text-anchor="middle">&#1084;&#1072;&#1088;&#1096;&#1088;&#1091;&#1090;&#1099; &#1080; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1099;</text>
+
+  <rect class="component" x="110" y="385" width="325" height="86" rx="8"/>
+  <rect class="component" x="125" y="400" width="28" height="15"/>
+  <rect class="component" x="125" y="422" width="28" height="15"/>
+  <text class="label" x="285" y="420" text-anchor="middle">&#1061;&#1088;&#1072;&#1085;&#1080;&#1083;&#1080;&#1097;&#1077; &#1089;&#1094;&#1077;&#1085;&#1072;&#1088;&#1080;&#1103;</text>
+  <text class="small" x="285" y="446" text-anchor="middle">Redux Toolkit</text>
+
+  <rect class="main" x="110" y="535" width="325" height="86" rx="8"/>
+  <rect class="main" x="125" y="550" width="28" height="15"/>
+  <rect class="main" x="125" y="572" width="28" height="15"/>
+  <text class="label" x="285" y="570" text-anchor="middle">API-&#1082;&#1083;&#1080;&#1077;&#1085;&#1090;</text>
+  <text class="small" x="285" y="596" text-anchor="middle">fetch + REST API</text>
+
+  <rect class="component" x="110" y="685" width="325" height="86" rx="8"/>
+  <rect class="component" x="125" y="700" width="28" height="15"/>
+  <rect class="component" x="125" y="722" width="28" height="15"/>
+  <text class="label" x="285" y="720" text-anchor="middle">&#1051;&#1086;&#1082;&#1072;&#1083;&#1100;&#1085;&#1086;&#1077; &#1093;&#1088;&#1072;&#1085;&#1080;&#1083;&#1080;&#1097;&#1077;</text>
+  <text class="small" x="285" y="746" text-anchor="middle">localStorage</text>
+
+  <rect class="package" x="555" y="140" width="610" height="765" rx="10"/>
+  <rect class="tab" x="555" y="140" width="205" height="44" rx="6"/>
+  <text class="head" x="657" y="169" text-anchor="middle">API &#1073;&#1101;&#1082;&#1077;&#1085;&#1076;&#1072;</text>
+
+  <circle class="iface" cx="555" cy="578" r="13"/>
+  <line class="line" x1="568" y1="578" x2="610" y2="578"/>
+  <text class="tiny" x="514" y="552" text-anchor="middle">REST API</text>
+
+  <rect class="main" x="610" y="235" width="225" height="86" rx="8"/>
+  <rect class="main" x="625" y="250" width="28" height="15"/>
+  <rect class="main" x="625" y="272" width="28" height="15"/>
+  <text class="label" x="735" y="268" text-anchor="middle">FastAPI</text>
+  <text class="small" x="735" y="294" text-anchor="middle">&#1084;&#1072;&#1088;&#1096;&#1088;&#1091;&#1090;&#1080;&#1079;&#1072;&#1090;&#1086;&#1088;</text>
+
+  <rect class="component" x="890" y="235" width="225" height="86" rx="8"/>
+  <rect class="component" x="905" y="250" width="28" height="15"/>
+  <rect class="component" x="905" y="272" width="28" height="15"/>
+  <text class="label" x="1015" y="268" text-anchor="middle">&#1057;&#1093;&#1077;&#1084;&#1099;</text>
+  <text class="small" x="1015" y="294" text-anchor="middle">Pydantic</text>
+
+  <rect class="component" x="610" y="385" width="225" height="86" rx="8"/>
+  <rect class="component" x="625" y="400" width="28" height="15"/>
+  <rect class="component" x="625" y="422" width="28" height="15"/>
+  <text class="label" x="735" y="418" text-anchor="middle">&#1040;&#1085;&#1072;&#1083;&#1080;&#1079; &#1094;&#1074;&#1077;&#1090;&#1072;</text>
+  <text class="small" x="735" y="444" text-anchor="middle">OpenCV + KMeans</text>
+
+  <rect class="component" x="890" y="385" width="225" height="86" rx="8"/>
+  <rect class="component" x="905" y="400" width="28" height="15"/>
+  <rect class="component" x="905" y="422" width="28" height="15"/>
+  <text class="label" x="1015" y="418" text-anchor="middle">&#1057;&#1077;&#1088;&#1074;&#1080;&#1089; &#1075;&#1072;&#1088;&#1084;&#1086;&#1085;&#1080;&#1080;</text>
+  <text class="small" x="1015" y="444" text-anchor="middle">&#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1072; &#1048;&#1090;&#1090;&#1077;&#1085;&#1072;</text>
+
+  <rect class="main" x="610" y="535" width="505" height="86" rx="8"/>
+  <rect class="main" x="625" y="550" width="28" height="15"/>
+  <rect class="main" x="625" y="572" width="28" height="15"/>
+  <text class="label" x="862" y="568" text-anchor="middle">&#1057;&#1077;&#1088;&#1074;&#1080;&#1089; &#1088;&#1077;&#1082;&#1086;&#1084;&#1077;&#1085;&#1076;&#1072;&#1094;&#1080;&#1081;</text>
+  <text class="small" x="862" y="594" text-anchor="middle">&#1092;&#1080;&#1083;&#1100;&#1090;&#1088; &#1087;&#1086; &#1082;&#1083;&#1080;&#1084;&#1072;&#1090;&#1091; &#1080; &#1087;&#1086;&#1095;&#1074;&#1077;, &#1089;&#1082;&#1086;&#1088;&#1080;&#1085;&#1075; &#1094;&#1074;&#1077;&#1090;&#1072;</text>
+
+  <rect class="component" x="610" y="685" width="225" height="86" rx="8"/>
+  <rect class="component" x="625" y="700" width="28" height="15"/>
+  <rect class="component" x="625" y="722" width="28" height="15"/>
+  <text class="label" x="735" y="718" text-anchor="middle">&#1044;&#1086;&#1089;&#1090;&#1091;&#1087; &#1082; &#1041;&#1044;</text>
+  <text class="small" x="735" y="744" text-anchor="middle">SQLAlchemy</text>
+
+  <rect class="component" x="890" y="685" width="225" height="86" rx="8"/>
+  <rect class="component" x="905" y="700" width="28" height="15"/>
+  <rect class="component" x="905" y="722" width="28" height="15"/>
+  <text class="label" x="1015" y="718" text-anchor="middle">&#1050;&#1072;&#1090;&#1072;&#1083;&#1086;&#1075; &#1092;&#1086;&#1090;&#1086;</text>
+  <text class="small" x="1015" y="744" text-anchor="middle">StaticFiles /photos</text>
+
+  <rect class="package" x="1230" y="140" width="310" height="765" rx="10"/>
+  <rect class="tab" x="1230" y="140" width="160" height="44" rx="6"/>
+  <text class="head" x="1310" y="169" text-anchor="middle">&#1044;&#1072;&#1085;&#1085;&#1099;&#1077;</text>
+
+  <rect class="component" x="1270" y="535" width="230" height="86" rx="8"/>
+  <rect class="component" x="1285" y="550" width="28" height="15"/>
+  <rect class="component" x="1285" y="572" width="28" height="15"/>
+  <text class="label" x="1395" y="570" text-anchor="middle">&#1054;&#1073;&#1097;&#1080;&#1081; &#1087;&#1072;&#1082;&#1077;&#1090;</text>
+  <text class="small" x="1395" y="596" text-anchor="middle">flora_recommend</text>
+
+  <rect class="main" x="1260" y="685" width="130" height="86" rx="8"/>
+  <rect class="main" x="1272" y="700" width="24" height="14"/>
+  <rect class="main" x="1272" y="720" width="24" height="14"/>
+  <text class="label" x="1325" y="718" text-anchor="middle">PostgreSQL</text>
+  <text class="small" x="1325" y="744" text-anchor="middle">&#1041;&#1044;</text>
+
+  <rect class="component" x="1405" y="685" width="115" height="86" rx="8"/>
+  <rect class="component" x="1417" y="700" width="24" height="14"/>
+  <rect class="component" x="1417" y="720" width="24" height="14"/>
+  <text class="label" x="1462" y="718" text-anchor="middle">&#1060;&#1086;&#1090;&#1086;</text>
+  <text class="small" x="1462" y="744" text-anchor="middle">photos</text>
+
+  <path class="dep" d="M285 321 V385"/>
+  <path class="dep" d="M285 471 V535"/>
+  <path class="dep" d="M285 621 V685"/>
+  <path class="arrow" d="M435 578 H542"/>
+
+  <path class="line" d="M610 578 H555"/>
+  <path class="dep" d="M835 278 H890"/>
+  <path class="dep" d="M735 321 V385"/>
+  <path class="dep" d="M835 428 H890"/>
+  <path class="dep" d="M735 471 V535"/>
+  <path class="dep" d="M1015 471 V535"/>
+  <path class="dep" d="M735 621 V685"/>
+  <path class="dep" d="M1015 621 V685"/>
+
+  <path class="arrow" d="M835 728 H860 V823 H1325 V771"/>
+  <path class="arrow" d="M1115 728 H1200 V823 H1462 V771"/>
+  <path class="dep" d="M1115 578 H1270"/>
+
+  <rect class="note" x="90" y="945" width="1420" height="58" rx="8"/>
+  <text class="small" x="800" y="968" text-anchor="middle">&#1055;&#1088;&#1077;&#1076;&#1086;&#1089;&#1090;&#1072;&#1074;&#1083;&#1103;&#1077;&#1084;&#1099;&#1081; &#1080;&#1085;&#1090;&#1077;&#1088;&#1092;&#1077;&#1081;&#1089;: REST API</text>
+  <text class="small" x="800" y="990" text-anchor="middle">&#1058;&#1088;&#1077;&#1073;&#1091;&#1077;&#1084;&#1099;&#1077;: PostgreSQL, &#1082;&#1072;&#1090;&#1072;&#1083;&#1086;&#1075; &#1092;&#1086;&#1090;&#1086;, &#1086;&#1073;&#1097;&#1080;&#1077; &#1072;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;&#1099;</text>
+</svg>

@@ -1,0 +1,57 @@
+@startuml
+title UML-диаграмма компонентов Flora Vision
+skinparam componentStyle uml2
+skinparam shadowing false
+skinparam backgroundColor #fbfcfa
+skinparam packageBackgroundColor #ffffff
+skinparam packageBorderColor #202a22
+skinparam componentBackgroundColor #ffffff
+skinparam componentBorderColor #202a22
+skinparam ArrowColor #202a22
+
+package "Фронтенд\nReact + Vite" as Frontend {
+  component "React-приложение" as ReactApp
+  component "Хранилище сценария\nRedux Toolkit" as FlowStore
+  component "API-клиент\nfetch-адаптер" as ApiClient
+  component "Локальное хранилище мудбордов\nlocalStorage" as LocalStorage
+}
+
+package "API бэкенда\nFastAPI + Uvicorn" as Backend {
+  interface "REST API" as RestApi
+  component "Маршрутизатор FastAPI\nmain.py" as Router
+  component "Схемы\nPydantic" as Schemas
+  component "Анализатор цвета\nOpenCV + NumPy + KMeans" as ColorAnalyzer
+  component "Сервис гармонии\nповороты HSV по Иттену" as HarmonyService
+  component "Сервис рекомендаций\nоценка зоны, почвы и цвета" as RecommendationService
+  component "Доступ к базе данных\nасинхронный SQLAlchemy" as DbAccess
+  component "Каталог фото\nStaticFiles /photos" as PhotoCatalog
+}
+
+package "Слой данных" as Data {
+  database "PostgreSQL\nрастения, цвета, типы почв" as PostgreSQL
+  folder "Файлы изображений\nphotos + plant_photo_map.json" as ImageFiles
+  component "Общий пакет\nflora_recommend" as SharedPackage
+}
+
+ReactApp --> FlowStore : читает и обновляет сценарий
+ReactApp --> ApiClient : запрашивает анализ и рекомендации
+ApiClient --> LocalStorage : сохраняет токен и мудборды
+ApiClient --> RestApi : HTTP JSON / multipart
+
+RestApi - Router
+Router ..> Schemas : валидирует запросы и ответы DTO
+Router ..> ColorAnalyzer : /api/colors/extract
+Router ..> HarmonyService : /api/harmony
+Router ..> RecommendationService : /api/recommend
+RecommendationService ..> DbAccess : запрашивает растения и почвы
+RecommendationService ..> PhotoCatalog : формирует URL изображений
+RecommendationService ..> SharedPackage : помощники скоринга
+DbAccess --> PostgreSQL : асинхронный SQL
+PhotoCatalog --> ImageFiles : смонтированные статические файлы
+
+note bottom
+Основной сценарий:
+загрузка фото -> доминирующая палитра -> выбор гармонии ->
+город и почва -> ранжирование растений -> мудборд.
+end note
+@enduml

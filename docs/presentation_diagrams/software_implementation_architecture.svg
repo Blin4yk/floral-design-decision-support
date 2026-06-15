@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #000000; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 18px; }
+      .head { font-size: 22px; font-weight: 700; }
+      .label { font-size: 18px; font-weight: 700; }
+      .small { font-size: 15px; }
+      .tiny { font-size: 13px; }
+      .frame { fill: #ffffff; stroke: #000000; stroke-width: 3; }
+      .lane { fill: #ffffff; stroke: #000000; stroke-width: 2.4; }
+      .block { fill: #ffffff; stroke: #000000; stroke-width: 2; }
+      .main { fill: #ffffff; stroke: #000000; stroke-width: 3; }
+      .arrow { stroke: #000000; stroke-width: 2.6; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #000000; stroke-width: 2.2; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#000000"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1000" fill="#ffffff"/>
+  <text class="title" x="800" y="58" text-anchor="middle">&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1085;&#1072;&#1103; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103; Flora Vision</text>
+  <text class="subtitle" x="800" y="88" text-anchor="middle">React + FastAPI + PostgreSQL &#1074; Docker Compose</text>
+
+  <rect class="frame" x="55" y="125" width="1490" height="805" rx="12"/>
+  <text class="head" x="95" y="165">Docker Compose</text>
+  <text class="tiny" x="95" y="190">frontend:5173  |  plant-api:8000  |  db:5432</text>
+
+  <rect class="lane" x="95" y="225" width="395" height="575" rx="10"/>
+  <text class="head" x="292" y="265" text-anchor="middle">&#1060;&#1088;&#1086;&#1085;&#1090;&#1077;&#1085;&#1076;</text>
+  <text class="tiny" x="292" y="290" text-anchor="middle">React 18 + Vite</text>
+
+  <rect class="block" x="130" y="325" width="325" height="76" rx="8"/>
+  <text class="label" x="292" y="355" text-anchor="middle">&#1057;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1099; &#1080;&#1085;&#1090;&#1077;&#1088;&#1092;&#1077;&#1081;&#1089;&#1072;</text>
+  <text class="small" x="292" y="380" text-anchor="middle">&#1060;&#1086;&#1090;&#1086;, &#1075;&#1072;&#1088;&#1084;&#1086;&#1085;&#1080;&#1103;, &#1083;&#1086;&#1082;&#1072;&#1094;&#1080;&#1103;, &#1084;&#1091;&#1076;&#1073;&#1086;&#1088;&#1076;</text>
+
+  <rect class="block" x="130" y="435" width="145" height="76" rx="8"/>
+  <text class="label" x="202" y="466" text-anchor="middle">&#1056;&#1086;&#1091;&#1090;&#1080;&#1085;&#1075;</text>
+  <text class="small" x="202" y="491" text-anchor="middle">react-router</text>
+  <rect class="block" x="310" y="435" width="145" height="76" rx="8"/>
+  <text class="label" x="382" y="466" text-anchor="middle">&#1057;&#1090;&#1077;&#1081;&#1090;</text>
+  <text class="small" x="382" y="491" text-anchor="middle">Redux Toolkit</text>
+
+  <rect class="main" x="130" y="545" width="325" height="84" rx="8"/>
+  <text class="label" x="292" y="577" text-anchor="middle">FastAPIClient</text>
+  <text class="small" x="292" y="603" text-anchor="middle">/api/colors, /api/harmony</text>
+  <text class="small" x="292" y="623" text-anchor="middle">/api/recommend</text>
+
+  <rect class="block" x="130" y="665" width="325" height="76" rx="8"/>
+  <text class="label" x="292" y="696" text-anchor="middle">localStorage</text>
+  <text class="small" x="292" y="721" text-anchor="middle">&#1090;&#1086;&#1082;&#1077;&#1085; &#1080; &#1084;&#1091;&#1076;&#1073;&#1086;&#1088;&#1076;&#1099;</text>
+
+  <rect class="lane" x="585" y="225" width="620" height="575" rx="10"/>
+  <text class="head" x="895" y="265" text-anchor="middle">&#1041;&#1101;&#1082;&#1077;&#1085;&#1076;</text>
+  <text class="tiny" x="895" y="290" text-anchor="middle">FastAPI + Uvicorn + Pydantic + SQLAlchemy</text>
+
+  <rect class="main" x="630" y="325" width="230" height="76" rx="8"/>
+  <text class="label" x="745" y="356" text-anchor="middle">&#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; FastAPI</text>
+  <text class="small" x="745" y="381" text-anchor="middle">REST-&#1101;&#1085;&#1076;&#1087;&#1086;&#1080;&#1085;&#1090;&#1099;</text>
+
+  <rect class="block" x="930" y="325" width="230" height="76" rx="8"/>
+  <text class="label" x="1045" y="356" text-anchor="middle">&#1040;&#1085;&#1072;&#1083;&#1080;&#1079; &#1094;&#1074;&#1077;&#1090;&#1072;</text>
+  <text class="small" x="1045" y="381" text-anchor="middle">OpenCV + KMeans</text>
+
+  <rect class="block" x="630" y="445" width="230" height="86" rx="8"/>
+  <text class="label" x="745" y="477" text-anchor="middle">&#1043;&#1072;&#1088;&#1084;&#1086;&#1085;&#1080;&#1103;</text>
+  <text class="small" x="745" y="502" text-anchor="middle">&#1087;&#1086;&#1074;&#1086;&#1088;&#1086;&#1090;&#1099; HSV</text>
+  <text class="small" x="745" y="522" text-anchor="middle">&#1087;&#1086; &#1048;&#1090;&#1090;&#1077;&#1085;&#1091;</text>
+
+  <rect class="main" x="930" y="445" width="230" height="86" rx="8"/>
+  <text class="label" x="1045" y="477" text-anchor="middle">&#1056;&#1077;&#1082;&#1086;&#1084;&#1077;&#1085;&#1076;&#1072;&#1094;&#1080;&#1080;</text>
+  <text class="small" x="1045" y="502" text-anchor="middle">&#1082;&#1083;&#1080;&#1084;&#1072;&#1090;, &#1087;&#1086;&#1095;&#1074;&#1072;</text>
+  <text class="small" x="1045" y="522" text-anchor="middle">&#1094;&#1074;&#1077;&#1090;&#1086;&#1074;&#1086;&#1081; &#1089;&#1082;&#1086;&#1088;&#1080;&#1085;&#1075;</text>
+
+  <rect class="block" x="630" y="575" width="230" height="82" rx="8"/>
+  <text class="label" x="745" y="607" text-anchor="middle">SQLAlchemy</text>
+  <text class="small" x="745" y="632" text-anchor="middle">&#1072;&#1089;&#1080;&#1085;&#1093;&#1088;&#1086;&#1085;&#1085;&#1099;&#1077;</text>
+  <text class="small" x="745" y="652" text-anchor="middle">SQL-&#1079;&#1072;&#1087;&#1088;&#1086;&#1089;&#1099;</text>
+
+  <rect class="block" x="930" y="575" width="230" height="82" rx="8"/>
+  <text class="label" x="1045" y="607" text-anchor="middle">&#1050;&#1072;&#1090;&#1072;&#1083;&#1086;&#1075; &#1092;&#1086;&#1090;&#1086;</text>
+  <text class="small" x="1045" y="632" text-anchor="middle">/photos</text>
+  <text class="small" x="1045" y="652" text-anchor="middle">plant_photo_map.json</text>
+
+  <rect class="block" x="630" y="700" width="530" height="64" rx="8"/>
+  <text class="label" x="895" y="728" text-anchor="middle">&#1054;&#1073;&#1097;&#1080;&#1081; &#1087;&#1072;&#1082;&#1077;&#1090; &#1072;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;&#1086;&#1074;</text>
+  <text class="small" x="895" y="752" text-anchor="middle">flora_recommend: &#1087;&#1072;&#1083;&#1080;&#1090;&#1088;&#1072;, &#1075;&#1072;&#1088;&#1084;&#1086;&#1085;&#1080;&#1103;, &#1089;&#1082;&#1086;&#1088;&#1080;&#1085;&#1075;</text>
+
+  <rect class="lane" x="1290" y="225" width="215" height="575" rx="10"/>
+  <text class="head" x="1398" y="265" text-anchor="middle">&#1044;&#1072;&#1085;&#1085;&#1099;&#1077;</text>
+
+  <rect class="main" x="1320" y="565" width="155" height="88" rx="8"/>
+  <text class="label" x="1398" y="595" text-anchor="middle">PostgreSQL</text>
+  <text class="small" x="1398" y="620" text-anchor="middle">&#1088;&#1072;&#1089;&#1090;&#1077;&#1085;&#1080;&#1103;</text>
+  <text class="small" x="1398" y="640" text-anchor="middle">&#1094;&#1074;&#1077;&#1090;&#1072;, &#1087;&#1086;&#1095;&#1074;&#1099;</text>
+
+  <rect class="block" x="1320" y="325" width="155" height="82" rx="8"/>
+  <text class="label" x="1398" y="357" text-anchor="middle">dump_plants.sql</text>
+  <text class="small" x="1398" y="382" text-anchor="middle">&#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1077;</text>
+  <text class="small" x="1398" y="402" text-anchor="middle">&#1076;&#1072;&#1085;&#1085;&#1099;&#1077;</text>
+
+  <rect class="block" x="1320" y="690" width="155" height="82" rx="8"/>
+  <text class="label" x="1398" y="722" text-anchor="middle">&#1060;&#1086;&#1090;&#1086;</text>
+  <text class="small" x="1398" y="747" text-anchor="middle">&#1089;&#1084;&#1086;&#1085;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1086;</text>
+  <text class="small" x="1398" y="767" text-anchor="middle">&#1074; API</text>
+
+  <path class="arrow" d="M455 587 H585"/>
+  <path class="arrow" d="M860 363 H930"/>
+  <path class="arrow" d="M745 401 V445"/>
+  <path class="arrow" d="M860 488 H930"/>
+  <path class="arrow" d="M1045 531 V575"/>
+  <path class="arrow" d="M745 531 V575"/>
+  <path class="arrow" d="M1045 657 V700"/>
+  <path class="dash" d="M745 657 V700"/>
+  <path class="arrow" d="M860 616 H900 V675 H1290 V609 H1320"/>
+  <path class="arrow" d="M1160 616 H1235 V731 H1320"/>
+  <path class="dash" d="M1398 407 V565"/>
+
+  <rect class="block" x="95" y="835" width="1410" height="70" rx="8"/>
+  <text class="small" x="800" y="860" text-anchor="middle">&#1057;&#1094;&#1077;&#1085;&#1072;&#1088;&#1080;&#1081;: &#1079;&#1072;&#1075;&#1088;&#1091;&#1079;&#1082;&#1072; &#1092;&#1086;&#1090;&#1086; - &#1087;&#1072;&#1083;&#1080;&#1090;&#1088;&#1072; - &#1075;&#1072;&#1088;&#1084;&#1086;&#1085;&#1080;&#1103;</text>
+  <text class="small" x="800" y="883" text-anchor="middle">&#1043;&#1086;&#1088;&#1086;&#1076; &#1080; &#1087;&#1086;&#1095;&#1074;&#1072; - &#1092;&#1080;&#1083;&#1100;&#1090;&#1088; - &#1088;&#1072;&#1085;&#1078;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077; - &#1084;&#1091;&#1076;&#1073;&#1086;&#1088;&#1076;</text>
+</svg>
